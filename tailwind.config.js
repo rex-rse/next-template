@@ -13,8 +13,8 @@ module.exports = {
     },
     extend: {
       colors: {
-        logo: '#804E9F',
-        logoWhite: '#f4f2f9',
+        'bg-primary-light': '#fff',
+        'bg-primary-dark': '#000',
       },
     },
   },

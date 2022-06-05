@@ -11,8 +11,8 @@ const Index = () => {
   const count = useAppSelector(selectCount);
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center">
-      <p className="text-7xl font-bold text-black dark:text-white">
-        Next JS and Tailwind CSS Template
+      <p className="text-5xl font-bold text-black dark:text-white text-center">
+        Next JS, Tailwind CSS and Redux Toolkit Template
       </p>
       <div className="my-4">
         <ThemeSwitch />
