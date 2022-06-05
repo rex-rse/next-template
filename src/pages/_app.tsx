@@ -5,7 +5,7 @@ import Head from 'next/head';
 
 import '@styles/globals.css';
 import { ThemeProvider } from 'next-themes';
-import { store } from '../store';
+import { store } from '@store/index';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

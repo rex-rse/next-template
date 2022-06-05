@@ -3,8 +3,8 @@ import {
   decrement,
   increment,
   selectCount,
-} from 'store/counter/counterReducer';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
+} from '@store/counter/counterReducer';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
 
 const Index = () => {
   const dispatch = useAppDispatch();
