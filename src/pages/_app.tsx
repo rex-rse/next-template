@@ -1,23 +1,27 @@
 // import App from "next/app";
 import type { AppProps /*, AppContext */ } from 'next/app';
+import { Provider as ReduxProvider } from 'react-redux';
 import Head from 'next/head';
 
 import '@styles/globals.css';
 import { ThemeProvider } from 'next-themes';
+import { store } from '../store';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider attribute="class">
-      <Head>
-        {/* <link
+    <ReduxProvider store={store}>
+      <ThemeProvider attribute="class">
+        <Head>
+          {/* <link
             rel="icon"
             type="image/png"
             sizes="32x32"
             href="/favicon/favicon.ico"
           /> */}
-      </Head>
-      <Component {...pageProps} />
-    </ThemeProvider>
+        </Head>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </ReduxProvider>
   );
 }
 
