@@ -1,27 +1,45 @@
 // import App from "next/app";
 import type { AppProps /*, AppContext */ } from 'next/app';
 import { Provider as ReduxProvider } from 'react-redux';
+import { QueryClientProvider, QueryClient } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import Head from 'next/head';
 
 import '@styles/globals.css';
 import { ThemeProvider } from 'next-themes';
 import { store } from '@store/index';
+import { ReactElement, ReactNode } from 'react';
+import { NextPage } from 'next';
 
-function MyApp({ Component, pageProps }: AppProps) {
+export type NextPageWithLayout = NextPage & {
+  // eslint-disable-next-line no-unused-vars
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page);
+  const client = new QueryClient();
   return (
-    <ReduxProvider store={store}>
-      <ThemeProvider attribute="class">
-        <Head>
-          {/* <link
+    <QueryClientProvider client={client}>
+      <ReduxProvider store={store}>
+        <ThemeProvider attribute="class">
+          <Head>
+            {/* <link
             rel="icon"
             type="image/png"
             sizes="32x32"
             href="/favicon/favicon.ico"
           /> */}
-        </Head>
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </ReduxProvider>
+          </Head>
+          {getLayout(<Component {...pageProps} />)}
+          <ReactQueryDevtools initialIsOpen={false} />
+        </ThemeProvider>
+      </ReduxProvider>
+    </QueryClientProvider>
   );
 }
 

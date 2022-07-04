@@ -1,4 +1,7 @@
+import { ReactElement } from 'react';
 import ThemeSwitch from '@components/ThemeSwitch';
+import LandingLayout from '@layouts/LandingLayout';
+// import UserPanel from '@layouts/UserPanelLayout';
 import {
   decrement,
   increment,
@@ -10,7 +13,7 @@ const Index = () => {
   const dispatch = useAppDispatch();
   const count = useAppSelector(selectCount);
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center">
+    <div className="w-full h-96 flex flex-col justify-center items-center">
       <p className="text-5xl font-bold text-black dark:text-white text-center">
         Next JS, Tailwind CSS and Redux Toolkit Template
       </p>
@@ -41,6 +44,10 @@ const Index = () => {
       </div>
     </div>
   );
+};
+
+Index.getLayout = function getLayout(page: ReactElement) {
+  return <LandingLayout>{page}</LandingLayout>;
 };
 
 export default Index;
