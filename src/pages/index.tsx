@@ -10,6 +10,7 @@ import {
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import Input from '@components/inputs/Input';
 import { useForm } from 'react-hook-form';
+import { open } from '@store/counter/snackbarReducer';
 
 const Index = () => {
   const dispatch = useAppDispatch();
@@ -53,6 +54,9 @@ const Index = () => {
           errorMessage="error"
           register={register}
         />
+      </div>
+      <div>
+        <button onClick={() => dispatch(open())}>Open SnackBar</button>
       </div>
     </div>
   );

@@ -17,7 +17,6 @@ const Select = ({
   register,
   options,
   initialLabelAndValue,
-  onChange,
 }: TSelectProps) => {
   return (
     <div className="flex flex-col my-4">

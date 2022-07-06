@@ -10,6 +10,7 @@ import { ThemeProvider } from 'next-themes';
 import { store } from '@store/index';
 import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';
+import Snackbar from '@components/Snackbar';
 
 export type NextPageWithLayout = NextPage & {
   // eslint-disable-next-line no-unused-vars
@@ -36,6 +37,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
           /> */}
           </Head>
           {getLayout(<Component {...pageProps} />)}
+          <Snackbar />
           <ReactQueryDevtools initialIsOpen={false} />
         </ThemeProvider>
       </ReduxProvider>
