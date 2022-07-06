@@ -58,7 +58,13 @@ const Index = () => {
         />
       </div>
       <div>
-        <button onClick={() => dispatch(open())}>Open SnackBar</button>
+        <button
+          onClick={() =>
+            dispatch(open({ text: 'testasdasdasdasda', type: 'error' }))
+          }
+        >
+          Open SnackBar
+        </button>
       </div>
       <Button
         loading={loading}

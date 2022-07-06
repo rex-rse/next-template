@@ -1,21 +1,32 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../index';
 
 // declaring the types for our state
 export type SnackbarState = {
   open: boolean;
+  text: string;
+  type: 'success' | 'error';
 };
 
 const initialState: SnackbarState = {
   open: false,
+  text: '',
+  type: 'success',
 };
+
+interface TSnackbarPayload {
+  text: string;
+  type: 'success' | 'error';
+}
 
 export const counterSlice = createSlice({
   name: 'snackbar',
   initialState,
   reducers: {
-    open: (state) => {
+    open: (state, action: PayloadAction<TSnackbarPayload>) => {
       state.open = true;
+      state.text = action.payload.text;
+      state.type = action.payload.type;
     },
     close: (state) => {
       state.open = false;
