@@ -8,10 +8,13 @@ import {
   selectCount,
 } from '@store/counter/counterReducer';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
+import Input from '@components/inputs/Input';
+import { useForm } from 'react-hook-form';
 
 const Index = () => {
   const dispatch = useAppDispatch();
   const count = useAppSelector(selectCount);
+  const { register } = useForm<any>({});
   return (
     <div className="w-full h-96 flex flex-col justify-center items-center">
       <p className="text-5xl font-bold text-black dark:text-white text-center">
@@ -41,6 +44,15 @@ const Index = () => {
             </button>
           </div>
         </div>
+      </div>
+      <div>
+        <Input
+          label="test"
+          name="test"
+          type="text"
+          errorMessage="error"
+          register={register}
+        />
       </div>
     </div>
   );
