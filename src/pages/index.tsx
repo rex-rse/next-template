@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import ThemeSwitch from '@components/ThemeSwitch';
 import LandingLayout from '@layouts/LandingLayout';
 // import UserPanel from '@layouts/UserPanelLayout';
@@ -8,10 +8,16 @@ import {
   selectCount,
 } from '@store/counter/counterReducer';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
+import Input from '@components/inputs/Input';
+import { useForm } from 'react-hook-form';
+import { open } from '@store/counter/snackbarReducer';
+import Button from '@components/Button';
 
 const Index = () => {
   const dispatch = useAppDispatch();
   const count = useAppSelector(selectCount);
+  const { register } = useForm<any>({});
+  const [loading, setLoading] = useState<boolean>(false);
   return (
     <div className="w-full h-96 flex flex-col justify-center items-center">
       <p className="text-5xl font-bold text-black dark:text-white text-center">
@@ -42,6 +48,24 @@ const Index = () => {
           </div>
         </div>
       </div>
+      <div>
+        <Input
+          label="test"
+          name="test"
+          type="text"
+          errorMessage="error"
+          register={register}
+        />
+      </div>
+      <div>
+        <button onClick={() => dispatch(open())}>Open SnackBar</button>
+      </div>
+      <Button
+        loading={loading}
+        text="click me pls!"
+        type="button"
+        onClick={() => setLoading(true)}
+      />
     </div>
   );
 };

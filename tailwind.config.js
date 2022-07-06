@@ -15,6 +15,8 @@ module.exports = {
       colors: {
         'bg-primary-light': '#fff',
         'bg-primary-dark': '#000',
+        logo: '#009B71',
+        logoWhite: '#f4f2f9',
       },
     },
   },

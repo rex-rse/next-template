@@ -4,12 +4,17 @@ import { MenuIcon, XIcon } from '@heroicons/react/outline';
 // import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import * as React from 'react';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function LandingLayout({ children }) {
+interface TLandingLayout {
+  children: React.ReactElement;
+}
+
+const LandingLayout = ({ children }: TLandingLayout) => {
   const router = useRouter();
   const navigation = [
     { name: 'Inicio', href: '/' },
@@ -64,12 +69,9 @@ export default function LandingLayout({ children }) {
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <Link href="/login">
-                    <a
-                      href="/login"
-                      className="bg-green-700 text-white px-4 py-2 rounded-md"
-                    >
+                    <button className="bg-green-700 text-white px-4 py-2 rounded-md">
                       Login
-                    </a>
+                    </button>
                   </Link>
                 </div>
               </div>
@@ -103,4 +105,6 @@ export default function LandingLayout({ children }) {
       {children}
     </>
   );
-}
+};
+
+export default LandingLayout;
