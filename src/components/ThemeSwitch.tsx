@@ -13,7 +13,7 @@ const ThemeSwitch = () => {
   return (
     <div>
       <button
-        className="bg-black text-white dark:bg-white dark:text-black py-2 px-4 rounded-md hover:opacity-70 font-bold"
+        className="bg-black text-white py-2 px-4 rounded-md hover:opacity-70 font-bold"
         onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
       >
         Change Theme: {theme}

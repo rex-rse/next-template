@@ -52,9 +52,6 @@ const Register = () => {
             </p>
           </div>
         </div>
-        <div className="hidden md:block md:w-1/2">
-          <h1>hola</h1>
-        </div>
       </div>
     </>
   );

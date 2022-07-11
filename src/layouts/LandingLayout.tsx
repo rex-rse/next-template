@@ -102,7 +102,9 @@ const LandingLayout = ({ children }: TLandingLayout) => {
           </>
         )}
       </Disclosure>
-      {children}
+      <main className="max-w-5xl mx-auto min-h-content">
+        <div>{children}</div>
+      </main>
     </>
   );
 };

@@ -27,19 +27,19 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <QueryClientProvider client={client}>
       <ReduxProvider store={store}>
-        <ThemeProvider attribute="class">
-          <Head>
-            {/* <link
+        {/* <ThemeProvider> */}
+        <Head>
+          {/* <link
             rel="icon"
             type="image/png"
             sizes="32x32"
             href="/favicon/favicon.ico"
           /> */}
-          </Head>
-          {getLayout(<Component {...pageProps} />)}
-          <Snackbar />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </ThemeProvider>
+        </Head>
+        {getLayout(<Component {...pageProps} />)}
+        <Snackbar />
+        <ReactQueryDevtools initialIsOpen={false} />
+        {/* </ThemeProvider> */}
       </ReduxProvider>
     </QueryClientProvider>
   );

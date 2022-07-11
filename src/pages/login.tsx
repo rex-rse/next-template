@@ -19,12 +19,8 @@ const Login = () => {
               <div className="w-full">
                 <LogoDark className="w-40 mx-2" />
               </div>
-              <h1 className="text-3xl my-4 w-full font-bold  text-white dark:text-black">
-                Bienvenido!
-              </h1>
-              <p className="my-4 font-semibold text-white dark:text-black">
-                Registrate
-              </p>
+              <h1 className="text-3xl my-4 w-full font-bold ">Bienvenido!</h1>
+              <p className="my-4 font-semibold">Registrate</p>
               <div className="my-4">
                 <Input
                   errorMessage={errors.name}
@@ -61,7 +57,7 @@ const Login = () => {
                   onClick={() => console.log('hola')}
                 />
               </div>
-              <p className="text-center  text-white dark:text-black">
+              <p className="text-center ">
                 Ya estas registrado? <span>Ingresa</span>
               </p>
             </div>
