@@ -12,6 +12,9 @@ module.exports = {
       xl: '1280px',
     },
     extend: {
+      backgroundImage: {
+        'card-background': "url('/back.svg')",
+      },
       colors: {
         'bg-primary-light': '#fff',
         'bg-primary-dark': '#000',
