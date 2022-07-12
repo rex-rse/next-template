@@ -21,7 +21,7 @@ const Recharge = () => {
         <div className="p-2 md:w-1/2 lg:w-1/3">
           <Card
             title="Vehículos"
-            data="50Bs"
+            data="5"
             icon={<CheckCircleIcon className="block h-32" aria-hidden="true" />}
           />
         </div>
