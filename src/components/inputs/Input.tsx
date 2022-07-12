@@ -20,7 +20,7 @@ const Input = ({
 }: TInputProps) => {
   return (
     <div className="flex flex-col my-4">
-      <label className="font-bold">
+      <label className="">
         {label}{' '}
         {errorMessage ? (
           <span className="text-red-600 font-bold">({errorMessage})</span>
