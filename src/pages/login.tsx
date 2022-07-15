@@ -18,7 +18,7 @@ const Register = () => {
         <div className="w-full lg:w-1/2 mr-auto">
           <div className="max-w-xs mx-auto">
             <div className="w-full">
-              <LogoDark className="w-40 mx-2" />
+              <LogoDark className="w-24 mx-2" />
             </div>
             <h1 className="text-3xl my-4 w-full font-bold">
               Bienvenido al sistema
