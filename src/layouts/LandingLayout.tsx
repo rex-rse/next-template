@@ -4,30 +4,35 @@ import { MenuIcon, XIcon } from '@heroicons/react/outline';
 // import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import * as React from 'react';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function LandingLayout({ children }) {
+interface TLandingLayout {
+  children: React.ReactElement;
+}
+
+const LandingLayout = ({ children }: TLandingLayout) => {
   const router = useRouter();
   const navigation = [
     { name: 'Inicio', href: '/' },
-    { name: 'Equipo', href: '/team' },
-    { name: 'Productos', href: '/products' },
+    { name: 'Recargas', href: '/recharge' },
+    { name: 'vehículos', href: '/vehicles' },
     // { name: 'Calendar', href: '#' },
   ];
 
   return (
     <>
-      <Disclosure as="nav" className="bg-gray-800">
+      <Disclosure as="nav" className="bg-greenDark">
         {({ open }) => (
           <>
-            <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+            <div className="max-w-5xl mx-auto px-2 sm:px-6 lg:px-8">
               <div className="relative flex items-center justify-between h-16">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button*/}
-                  <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-greenLight focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -47,9 +52,9 @@ export default function LandingLayout({ children }) {
                           <button
                             className={classNames(
                               item.href === router.asPath
-                                ? 'bg-gray-900 text-white pointer-events-none'
-                                : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                              'px-3 py-2 rounded-md text-sm font-medium'
+                                ? 'bg-greenLight text-white pointer-events-none'
+                                : 'text-white hover:bg-greenLight hover:text-white',
+                              'px-3 py-2 rounded-md text-sm  font-semibold'
                             )}
                             aria-current={
                               item.href === router.asPath ? 'page' : undefined
@@ -63,13 +68,40 @@ export default function LandingLayout({ children }) {
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <Link href="/user">
+                    <button>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-8 w-8"
+                        viewBox="0 0 20 20"
+                        fill="#ffffff"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </button>
+                  </Link>
+
                   <Link href="/login">
-                    <a
-                      href="/login"
-                      className="bg-green-700 text-white px-4 py-2 rounded-md"
-                    >
-                      Login
-                    </a>
+                    <button className="p-2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-8 w-8"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="#ffff"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                        />
+                      </svg>
+                    </button>
                   </Link>
                 </div>
               </div>
@@ -84,8 +116,8 @@ export default function LandingLayout({ children }) {
                     href={item.href}
                     className={classNames(
                       item.href === router.asPath
-                        ? 'bg-gray-900 text-white pointer-events-none'
-                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        ? 'bg-greenLight text-white pointer-events-none'
+                        : 'text-white hover:bg-greenLight',
                       'block px-3 py-2 rounded-md text-base font-medium'
                     )}
                     aria-current={
@@ -100,7 +132,11 @@ export default function LandingLayout({ children }) {
           </>
         )}
       </Disclosure>
-      {children}
+      <main className="max-w-5xl mx-auto min-h-content ">
+        <div>{children}</div>
+      </main>
     </>
   );
-}
+};
+
+export default LandingLayout;
