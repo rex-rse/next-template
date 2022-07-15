@@ -8,6 +8,7 @@ interface TInputProps {
   register: UseFormRegister<any>;
   type: HTMLInputTypeAttribute;
   disabled?: boolean;
+  labelClassName?: string;
 }
 
 const Input = ({
@@ -17,11 +18,12 @@ const Input = ({
   register,
   type,
   disabled,
+  labelClassName,
 }: TInputProps) => {
   return (
     <div className="flex flex-col my-4">
-      <label className="">
-        {label}{' '}
+      <label className={labelClassName}>
+        {label}
         {errorMessage ? (
           <span className="text-red-600 font-bold">({errorMessage})</span>
         ) : null}

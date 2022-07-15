@@ -16,46 +16,50 @@ const Register = () => {
     <>
       <div className=" w-full h-screen flex items-center justify-center">
         <div className="w-full lg:w-1/2 mr-auto">
-          <div className="max-w-xs mx-auto">
-            <div className="w-full">
-              <LogoDark className="w-24 mx-2" />
-            </div>
-            <h1 className="text-3xl my-4 w-full font-bold">
-              Bienvenido al sistema
-            </h1>
+          <FooterLayout>
+            <div className="max-w-xs h-screen flex flex-col justify-center h mx-auto">
+              <div>
+                <div className="w-full">
+                  <LogoDark className="w-24 mx-2" />
+                </div>
+                <h1 className="text-3xl my-4 w-full font-bold">
+                  Bienvenido al sistema
+                </h1>
 
-            <div className="my-4">
-              <Input
-                errorMessage={errors.email}
-                label="Email"
-                name="email"
-                type="text"
-                register={register}
-              />
+                <div className="my-4">
+                  <Input
+                    errorMessage={errors.email}
+                    label="Email"
+                    name="email"
+                    type="text"
+                    register={register}
+                  />
+                </div>
+                <div className="my-4">
+                  <Input
+                    errorMessage={errors.password}
+                    label="Contraseña"
+                    name="password"
+                    type="password"
+                    register={register}
+                  />
+                </div>
+                <div className="my-4">
+                  <Button
+                    loading={false}
+                    text="Ingresar"
+                    type="button"
+                    onClick={() => console.log('hola')}
+                  />
+                </div>
+                <Link href="register">
+                  <p className="text-center cursor-pointer	">
+                    No tienes una cuenta? <span>Registrate</span>
+                  </p>
+                </Link>
+              </div>
             </div>
-            <div className="my-4">
-              <Input
-                errorMessage={errors.password}
-                label="Contraseña"
-                name="password"
-                type="password"
-                register={register}
-              />
-            </div>
-            <div className="my-4">
-              <Button
-                loading={false}
-                text="Ingresar"
-                type="button"
-                onClick={() => console.log('hola')}
-              />
-            </div>
-            <Link href="register">
-              <p className="text-center cursor-pointer	">
-                No tienes una cuenta? <span>Registrate</span>
-              </p>
-            </Link>
-          </div>
+          </FooterLayout>
         </div>
         <div className=" hidden lg:block w-3/4">
           <img className="h-screen w-full " src="/imagen.jpeg" alt="login" />
@@ -63,10 +67,6 @@ const Register = () => {
       </div>
     </>
   );
-};
-
-Register.getLayout = function getLayout(page: ReactElement) {
-  return <FooterLayout>{page}</FooterLayout>;
 };
 
 export default Register;
