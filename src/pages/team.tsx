@@ -20,7 +20,7 @@ const Team = () => {
       ) : (
         <div className="flex flex-wrap">
           {data.results.map((character) => (
-            <div className="w-1/5 flex flex-col" key={character.id}>
+            <div className="flex w-1/5 flex-col" key={character.id}>
               <div className="self-center">
                 <Image
                   src={character.image}

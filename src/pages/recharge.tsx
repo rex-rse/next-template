@@ -10,7 +10,7 @@ const Recharge = () => {
   const [loading, setLoading] = useState<boolean>(false);
   return (
     <div>
-      <div className="md:flex flex-wrap p-4">
+      <div className="flex-wrap p-4 md:flex">
         <div className="p-2 md:w-1/2 lg:w-1/3">
           <Card
             title="Saldo"

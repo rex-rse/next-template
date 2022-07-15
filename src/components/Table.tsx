@@ -8,7 +8,6 @@ interface TableProps {
 }
 
 const Table = ({ headers, data }: TableProps) => {
-
   // const headers = [
   //   {
   //     id: '1',

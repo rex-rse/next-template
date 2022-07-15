@@ -3,14 +3,14 @@ import { CheckCircleIcon, XIcon } from '@heroicons/react/outline';
 
 const FooterLayout = ({ children }) => {
   return (
-    <div className="flex flex-col h-screen justify-between bg-gradient-to-r to-white from-blue-200">
+    <div className="flex h-screen flex-col justify-between bg-gradient-to-r from-blue-200 to-white">
       {children}
-      <div className="my-2 p-2 w-full">
-        <div className="flex justify-center my-4">
-          <CheckCircleIcon className="block h-6 w-6 mx-4" aria-hidden="true" />
-          <XIcon className="block h-6 w-6 mx-4" aria-hidden="true" />
+      <div className="my-2 w-full p-2">
+        <div className="my-4 flex justify-center">
+          <CheckCircleIcon className="mx-4 block h-6 w-6" aria-hidden="true" />
+          <XIcon className="mx-4 block h-6 w-6" aria-hidden="true" />
         </div>
-        <p className="text-center my-2">
+        <p className="my-2 text-center">
           Copyright © 2022 Soft by Creative Tim.
         </p>
       </div>

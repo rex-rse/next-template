@@ -14,15 +14,15 @@ const Register = () => {
 
   return (
     <>
-      <div className=" w-full h-screen flex items-center justify-center">
-        <div className="w-full lg:w-1/2 mr-auto">
+      <div className=" flex h-screen w-full items-center justify-center">
+        <div className="mr-auto w-full lg:w-1/2">
           <FooterLayout>
-            <div className="max-w-xs h-screen flex flex-col justify-center h mx-auto">
+            <div className="h mx-auto flex h-screen max-w-xs flex-col justify-center">
               <div>
                 <div className="w-full">
-                  <LogoDark className="w-24 mx-2" />
+                  <LogoDark className="mx-2 w-24" />
                 </div>
-                <h1 className="text-3xl my-4 w-full font-bold">
+                <h1 className="my-4 w-full text-3xl font-bold">
                   Bienvenido al sistema
                 </h1>
 
@@ -53,7 +53,7 @@ const Register = () => {
                   />
                 </div>
                 <Link href="register">
-                  <p className="text-center cursor-pointer	">
+                  <p className="cursor-pointer text-center	">
                     No tienes una cuenta? <span>Registrate</span>
                   </p>
                 </Link>
@@ -61,7 +61,7 @@ const Register = () => {
             </div>
           </FooterLayout>
         </div>
-        <div className=" hidden lg:block w-3/4">
+        <div className=" hidden w-3/4 lg:block">
           <img className="h-screen w-full " src="/imagen.jpeg" alt="login" />
         </div>
       </div>
