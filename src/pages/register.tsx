@@ -13,14 +13,14 @@ const Login = () => {
   } = useForm<any>({});
   return (
     <>
-      <div className="p-4 md:p-10 w-full flex flex-col items-center justify-center">
+      <div className="flex w-full flex-col items-center justify-center p-4 md:p-10">
         <div className="w-full max-w-md">
-          <div className="backdrop-blur-sm bg-white/30 shadow overflow-hidden rounded-lg px-6 py-14 md:p-14">
-            <div className="max-w-md md:max-w-xs mx-auto">
+          <div className="overflow-hidden rounded-lg bg-white/30 px-6 py-14 shadow backdrop-blur-sm md:p-14">
+            <div className="mx-auto max-w-md md:max-w-xs">
               <div className="w-full">
-                <LogoDark className="w-40 mx-2" />
+                <LogoDark className="mx-2 w-40" />
               </div>
-              <h1 className="text-3xl  my-4 w-full font-bold ">Bienvenido!</h1>
+              <h1 className="my-4  w-full text-3xl font-bold ">Bienvenido!</h1>
               <p className="my-4 font-semibold ">Registrate</p>
               <div className="my-4">
                 <Input
@@ -62,7 +62,7 @@ const Login = () => {
                 />
               </div>
               <Link href="login">
-                <p className="text-center cursor-pointer 	 ">
+                <p className="cursor-pointer text-center">
                   Ya estas registrado? <span>Ingresa</span>
                 </p>
               </Link>

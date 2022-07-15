@@ -4,7 +4,7 @@ import { UseFormRegister } from 'react-hook-form';
 interface TInputProps {
   label: string;
   name: string;
-  errorMessage: string;
+  errorMessage: any;
   register: UseFormRegister<any>;
   type: HTMLInputTypeAttribute;
   disabled?: boolean;
