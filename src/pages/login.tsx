@@ -14,8 +14,8 @@ const Register = () => {
 
   return (
     <>
-      <div className="p-6 w-full h-screen flex items-center justify-center">
-        <div className="w-full md:w-1/2">
+      <div className=" w-full h-screen flex items-center justify-center">
+        <div className="w-full lg:w-1/2 mr-auto">
           <div className="max-w-xs mx-auto">
             <div className="w-full">
               <LogoDark className="w-40 mx-2" />
@@ -56,6 +56,9 @@ const Register = () => {
               </p>
             </Link>
           </div>
+        </div>
+        <div className=" hidden lg:block w-3/4">
+          <img className="h-screen w-full " src="/imagen.jpeg" alt="login" />
         </div>
       </div>
     </>

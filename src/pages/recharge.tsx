@@ -18,14 +18,14 @@ const Recharge = () => {
             icon={<CheckCircleIcon className="block h-32" aria-hidden="true" />}
           />
         </div>
-        <div className="p-2 md:w-1/2 lg:w-1/3 bg-card-background-1">
+        <div className="p-2 md:w-1/2 lg:w-1/3 ">
           <Card
             title="Vehículos"
             data="5"
             icon={<CheckCircleIcon className="block h-32" aria-hidden="true" />}
           />
         </div>
-        <div className="p-2 md:w-1/2 lg:w-1/3 bg-card-background-3">
+        <div className="p-2 md:w-1/2 lg:w-1/3 ">
           <Card
             title="Saldo"
             data="50Bs"
