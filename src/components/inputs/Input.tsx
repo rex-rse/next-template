@@ -31,7 +31,7 @@ const Input = ({
         className={`input ${
           errorMessage
             ? 'input-error'
-            : 'focus:ring-indigo-500 focus:border-indigo-500'
+            : 'focus:ring-greenDark focus:border-greenDark'
         }`}
         name={name}
         disabled={disabled}

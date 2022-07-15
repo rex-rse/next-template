@@ -15,13 +15,15 @@ const Login = () => {
     <>
       <div className="p-8 w-full h-screen flex flex-col items-center justify-center">
         <div className="w-1/2 ">
-          <div className="bg-slate-500 shadow overflow-hidden sm:rounded-lg">
+          <div className="bg-gradient-to-r from-greenDark to-greenMedium shadow overflow-hidden rounded-lg">
             <div className="max-w-xs mx-auto">
               <div className="w-full">
                 <LogoDark className="w-40 mx-2" />
               </div>
-              <h1 className="text-3xl my-4 w-full font-bold ">Bienvenido!</h1>
-              <p className="my-4 font-semibold">Registrate</p>
+              <h1 className="text-3xl text-white my-4 w-full font-bold ">
+                Bienvenido!
+              </h1>
+              <p className="my-4 font-semibold text-white">Registrate</p>
               <div className="my-4">
                 <Input
                   errorMessage={errors.name}
@@ -59,7 +61,7 @@ const Login = () => {
                 />
               </div>
               <Link href="login">
-                <p className="text-center cursor-pointer	 ">
+                <p className="text-center cursor-pointer text-white	 ">
                   Ya estas registrado? <span>Ingresa</span>
                 </p>
               </Link>

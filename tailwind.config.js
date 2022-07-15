@@ -13,7 +13,8 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'card-background': "url('/back.svg')",
+        'card-background-1': "url('/back1.svg')",
+        'card-background-2': "url('/back2.svg')",
       },
       colors: {
         'bg-primary-light': '#fff',
