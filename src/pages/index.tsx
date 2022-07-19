@@ -19,7 +19,7 @@ const Index = () => {
   const { register } = useForm<any>({});
   const [loading, setLoading] = useState<boolean>(false);
   return (
-    <div className="flex h-96 w-full flex-col items-center justify-center">
+    <div className="flex w-full flex-col items-center justify-center">
       <p className="text-center text-5xl font-bold text-black">
         Next JS, Tailwind CSS and Redux Toolkit Template
       </p>
