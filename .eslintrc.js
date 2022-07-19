@@ -12,5 +12,6 @@ module.exports = {
     'next',
     'next/core-web-vitals',
     'prettier',
+    'plugin:react-hooks/recommended',
   ],
 };
