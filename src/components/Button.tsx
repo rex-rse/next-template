@@ -14,10 +14,10 @@ const Button = ({ loading, text, type, onClick }: ButtonProps) => {
       type={type}
       disabled={loading}
       onClick={onClick}
-      className={`relative inline-flex h-10 w-full justify-center rounded-md bg-greenLight py-1 px-4 align-middle text-white shadow-sm  focus:outline-none focus:ring-2 focus:ring-greenLight focus:ring-offset-2 ${
+      className={`relative inline-flex h-10 w-full items-center justify-center rounded-md bg-emerald-600/70 py-1 px-4 align-middle text-white shadow-md  focus:outline-none focus:ring-2 focus:ring-greenLight focus:ring-offset-2 ${
         loading
           ? 'pointer-events-none'
-          : 'border-2 border-greenMedium font-bold hover:bg-greenDark hover:text-white '
+          : ' font-bold transition-all delay-100 duration-200 hover:shadow-lg hover:bg-emerald-600/50 hover:text-white '
       }`}
     >
       {loading ? (

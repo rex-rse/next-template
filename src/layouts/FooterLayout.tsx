@@ -3,7 +3,7 @@ import { CheckCircleIcon, XIcon } from '@heroicons/react/outline';
 
 const FooterLayout = ({ children }) => {
   return (
-    <div className="flex h-screen flex-col justify-between bg-gradient-to-r from-blue-200 to-white">
+    <div className="flex h-screen w-screen flex-col justify-between">
       {children}
       <div className="my-2 w-full p-2">
         <div className="my-4 flex justify-center">
