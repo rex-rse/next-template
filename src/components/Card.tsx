@@ -2,11 +2,11 @@ import React from 'react';
 
 const Card = ({ title, data, icon }) => {
   return (
-    <div className="flex  text-black shadow-md rounded-lg max-h-48 hover:shadow-xl bg-card-background-1 hover:bg-card-background-2">
-      <div className="w-1/3 p-2 flex justify-center items-center">{icon}</div>
-      <div className="w-2/3 p-2">
-        <h1 className="text-3xl font-bold m-4">{title}</h1>
-        <h2 className="text-5xl m-4">{data}</h2>
+    <div className="flex aspect-[7/3] rounded-lg bg-gray-50 bg-card-background-1 text-black shadow-lg hover:bg-card-background-2 hover:shadow-xl">
+      <div className="flex w-1/3 items-center justify-center p-2">{icon}</div>
+      <div className="flex w-2/3 flex-col justify-evenly p-2">
+        <h1 className="lg:text-3xl text-2xl font-bold">{title}</h1>
+        <h2 className="text-4xl lg:text-5xl">{data}</h2>
       </div>
     </div>
   );

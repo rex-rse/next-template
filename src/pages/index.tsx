@@ -19,8 +19,8 @@ const Index = () => {
   const { register } = useForm<any>({});
   const [loading, setLoading] = useState<boolean>(false);
   return (
-    <div className="w-full h-96 flex flex-col justify-center items-center">
-      <p className="text-5xl font-bold text-black text-center">
+    <div className="flex w-full flex-col items-center justify-center">
+      <p className="text-center text-5xl font-bold text-black">
         Next JS, Tailwind CSS and Redux Toolkit Template
       </p>
       <div className="my-4">
@@ -31,7 +31,7 @@ const Index = () => {
         <div className="flex justify-center text-center">
           <div className="w-1/3">
             <button
-              className="w-7 h-7 rounded-full bg-black text-white hover:opacity-70 font-bold"
+              className="h-7 w-7 rounded-full bg-black font-bold text-white hover:opacity-70"
               onClick={() => dispatch(decrement())}
             >
               -
@@ -40,7 +40,7 @@ const Index = () => {
           <p className="w-1/3">{count}</p>
           <div className="w-1/3">
             <button
-              className="w-7 h-7 rounded-full bg-black text-white hover:opacity-70 font-bold"
+              className="h-7 w-7 rounded-full bg-black font-bold text-white hover:opacity-70"
               onClick={() => dispatch(increment())}
             >
               +

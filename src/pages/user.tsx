@@ -11,7 +11,7 @@ const User = () => {
   } = useForm<any>({});
   return (
     <div>
-      <div className="p-8 grid grid-cols-1 sm:grid-cols-2">
+      <div className="grid grid-cols-1 p-8 sm:grid-cols-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-8 w-8"
@@ -27,7 +27,7 @@ const User = () => {
 
         <p className="text-xl font-bold text-greenMedium ">Alan Brito Dulce</p>
       </div>
-      <div className="p-8 sm:grid grid-cols-2 gap-2">
+      <div className="grid-cols-2 gap-2 p-8 sm:grid">
         <div className="my-4">
           <Input
             errorMessage={errors.phone}

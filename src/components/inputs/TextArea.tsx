@@ -10,11 +10,11 @@ interface TInputProps {
 
 const Input = ({ label, name, errorMessage, register, rows }: TInputProps) => {
   return (
-    <div className="flex flex-col my-4">
+    <div className="my-4 flex flex-col">
       <label className="font-bold">
         {label}{' '}
         {errorMessage ? (
-          <span className="text-red-600 font-bold">({errorMessage})</span>
+          <span className="font-bold text-red-600">({errorMessage})</span>
         ) : null}
       </label>
       <textarea

@@ -3,7 +3,7 @@ import Button from './Button';
 
 const Payments = () => {
   return (
-    <div className="md:flex flex-wrap">
+    <div className="flex-wrap md:flex">
       <div className="p-4 md:w-1/2 lg:w-1/3">
         <Button
           loading={false}
