@@ -3,7 +3,6 @@ import LogoDark from '@components/icons/LogoDark';
 import Input from '@components/inputs/Input';
 import FooterLayout from '@layouts/FooterLayout';
 import Link from 'next/link';
-import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 
 const Register = () => {
@@ -62,7 +61,7 @@ const Register = () => {
           </FooterLayout>
         </div>
         <div className=" hidden lg:block w-3/4">
-          <img className="h-screen w-full " src="/imagen.jpeg" alt="login" />
+          <img className="h-screen w-full " src="/login.svg" alt="login" />
         </div>
       </div>
     </>
