@@ -3,7 +3,6 @@ import LogoDark from '@components/icons/LogoDark';
 import Input from '@components/inputs/Input';
 import FooterLayout from '@layouts/FooterLayout';
 import Link from 'next/link';
-import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 
 const Register = () => {
