@@ -1,10 +1,8 @@
-import Button from '@components/Button';
-import LogoDark from '@components/icons/LogoDark';
-import Input from '@components/inputs/Input';
-import InputV2 from '@components/inputs/InputV2';
-import FooterLayout from '@layouts/FooterLayout';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
+import FooterLayout from '@layouts/FooterLayout';
+import LogoDark from '@components/icons/LogoDark';
+import InputV2 from '@components/inputs/InputV2';
 
 const Register = () => {
   const {
@@ -24,78 +22,32 @@ const Register = () => {
               Bienvenido al sistema
             </h1>
             <form className="mt-12">
-              <div className="mt-8 mb-8">
+              <div className="mt-10">
                 <InputV2
-                  label="Nombre"
-                  name="name"
-                  type={'email'}
+                  label="Correo electrónico"
+                  name="email"
+                  type="text"
                   // error={true}
                   errorMessage="ads"
                   register={register}
                 />
               </div>
-              <div className="relative">
-                <input
-                  id="email"
-                  name="email"
-                  type="text"
-                  className="peer h-10 w-full border-0 border-b-2 border-gray-300 bg-white/0 text-gray-900 placeholder-transparent focus:border-emerald-600 focus:outline-none focus:ring-0"
-                  placeholder="Correo electrónico"
-                />
-                <label
-                  htmlFor="email"
-                  className="absolute left-0 -top-3.5 text-sm text-gray-900 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-gray-600"
-                >
-                  Correo electrónico
-                </label>
-              </div>
-              <div className="relative mt-10">
-                <input
-                  id="password"
-                  type="password"
+              <div className="mt-10">
+                <InputV2
+                  label="Contraseña"
                   name="password"
-                  className="peer h-10 w-full border-0 border-b-2 border-gray-300 bg-white/0 text-gray-900 placeholder-transparent outline-none focus:border-emerald-600 focus:outline-none focus:ring-0"
-                  placeholder="Contraseña"
+                  type="password"
+                  // error={true}
+                  errorMessage="ads"
+                  register={register}
                 />
-                <label
-                  htmlFor="password"
-                  className="absolute left-0 -top-3.5 text-sm text-gray-600 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-gray-600"
-                >
-                  Contraseña
-                </label>
               </div>
               <input
-                type="sumbit"
+                type="submit"
                 value="Ingresar"
-                className="mt-16 block w-full cursor-pointer rounded bg-emerald-600/70 px-4 py-2 text-center font-semibold text-white hover:bg-emerald-600/50 focus:outline-none focus:ring focus:ring-emerald-600/50 focus:ring-opacity-80 focus:ring-offset-2"
+                className="mt-16 block w-full cursor-pointer rounded bg-emerald-600/70 px-4 py-2 text-center font-semibold text-white shadow-md hover:bg-emerald-600/50 focus:outline-none focus:ring focus:ring-emerald-600/50 focus:ring-opacity-80 focus:ring-offset-2"
               />
             </form>
-            {/* <div className="my-4">
-              <Input
-                errorMessage={errors.email}
-                label="Email"
-                name="email"
-                type="text"
-                register={register}
-              />
-            </div>
-            <div className="my-4">
-              <Input
-                errorMessage={errors.password}
-                label="Contraseña"
-                name="password"
-                type="password"
-                register={register}
-              />
-            </div> 
-            <div className="my-4">
-              <Button
-                loading={false}
-                text="Ingresar"
-                type="button"
-                onClick={() => console.log('hola')}
-              />
-            </div> */}
             <Link href="register">
               <p className="mt-4 cursor-pointer text-center text-sm">
                 No tienes una cuenta?{' '}

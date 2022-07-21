@@ -1,81 +1,69 @@
-import { ReactElement } from 'react';
-import Button from '@components/Button';
-import LogoDark from '@components/icons/LogoDark';
-import Input from '@components/inputs/Input';
-import FooterLayout from '@layouts/FooterLayout';
-import { useForm } from 'react-hook-form';
 import Link from 'next/link';
+import { useForm } from 'react-hook-form';
+import FooterLayout from '@layouts/FooterLayout';
+import InputV2 from '@components/inputs/InputV2';
 
-const Login = () => {
+const Register = () => {
   const {
     register,
     formState: { errors },
   } = useForm<any>({});
   return (
-    <>
-      <div className="flex w-full flex-col items-center justify-center p-4 md:p-10">
-        <div className="w-full max-w-md">
-          <div className="overflow-hidden rounded-lg bg-white/30 px-6 py-14 shadow backdrop-blur-sm md:p-14">
-            <div className="mx-auto max-w-md md:max-w-xs">
-              <div className="w-full">
-                <LogoDark className="mx-2 w-40" />
-              </div>
-              <h1 className="my-4  w-full text-3xl font-bold ">Bienvenido!</h1>
-              <p className="my-4 font-semibold ">Registrate</p>
-              <div className="my-4">
-                <Input
-                  labelClassName=" font-semibold"
-                  errorMessage={errors.name}
-                  label="Nombre"
-                  name="name"
-                  type="text"
-                  register={register}
-                />
-              </div>
-
-              <div className="my-4">
-                <Input
-                  labelClassName=" font-semibold"
-                  errorMessage={errors.email}
-                  label="Email"
-                  name="email"
-                  type="text"
-                  register={register}
-                />
-              </div>
-              <div className="my-4">
-                <Input
-                  labelClassName=" font-semibold"
-                  errorMessage={errors.password}
-                  label="Contraseña"
-                  name="password"
-                  type="password"
-                  register={register}
-                />
-              </div>
-              <div className="my-4">
-                <Button
-                  loading={false}
-                  text="Ingresar"
-                  type="button"
-                  onClick={() => console.log('hola')}
-                />
-              </div>
-              <Link href="login">
-                <p className="cursor-pointer text-center">
-                  Ya estas registrado? <span>Ingresa</span>
-                </p>
-              </Link>
+    <div className="flex place-content-center bg-gradient-to-l from-emerald-700 to-emerald-100">
+      <FooterLayout>
+        <div className="mx-auto my-auto flex flex-col items-center justify-center rounded-2xl bg-white/75 p-10 shadow-2xl">
+          <h1 className="my-4 w-full text-3xl font-bold">
+            Bienvenido al sistema
+          </h1>
+          <form className="mt-12">
+            <div>
+              <InputV2
+                label="Nombre"
+                name="name"
+                type="text"
+                // error={true}
+                errorMessage="ads"
+                register={register}
+              />
             </div>
-          </div>
+            <div className="mt-10">
+              <InputV2
+                label="Correo electrónico"
+                name="email"
+                type="text"
+                // error={true}
+                errorMessage="ads"
+                register={register}
+              />
+            </div>
+            <div className="mt-10">
+              <InputV2
+                label="Contraseña"
+                name="password"
+                type="password"
+                // error={true}
+                errorMessage="ads"
+                register={register}
+              />
+            </div>
+            <input
+              type="submit"
+              value="Ingresar"
+              className="mt-16 block w-full cursor-pointer rounded bg-emerald-600/70 px-4 py-2 text-center font-semibold text-white shadow-md hover:bg-emerald-600/50 focus:outline-none focus:ring focus:ring-emerald-600/50 focus:ring-opacity-80 focus:ring-offset-2"
+            />
+          </form>
+          <Link href="login">
+            <p className="mt-4 cursor-pointer text-center text-sm">
+              Ya tienes una cuenta?{' '}
+              <span className="underline decoration-emerald-600 decoration-2 hover:text-emerald-600">
+                Ingresa
+              </span>
+            </p>
+          </Link>
         </div>
-      </div>
-    </>
+      </FooterLayout>
+    </div>
   );
 };
 
-Login.getLayout = function getLayout(page: ReactElement) {
-  return <FooterLayout>{page}</FooterLayout>;
-};
-
-export default Login;
+export default Register;

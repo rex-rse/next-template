@@ -23,8 +23,8 @@ const InputV2 = ({ label, type, name }: TInputProps) => {
         placeholder={label}
       />
       <label
-        htmlFor="email"
-        className="absolute left-0 -top-3.5 text-sm text-gray-900 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-gray-600"
+        htmlFor={name}
+        className="absolute left-0 -top-3.5 cursor-text text-sm text-gray-900 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-gray-600"
       >
         {label}
       </label>
