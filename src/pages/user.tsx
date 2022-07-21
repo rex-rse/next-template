@@ -3,6 +3,7 @@ import Input from '@components/inputs/Input';
 import LandingLayout from '@layouts/LandingLayout';
 import React, { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
+import { UserCircleIcon, PencilAltIcon } from '@heroicons/react/solid';
 
 const User = () => {
   const {
@@ -10,70 +11,33 @@ const User = () => {
     formState: { errors },
   } = useForm<any>({});
   return (
-    <div>
-      <div className="grid grid-cols-1 p-8 sm:grid-cols-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-8 w-8"
-          viewBox="0 0 20 20"
-          fill="#038203"
-        >
-          <path
-            fillRule="evenodd"
-            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-            clipRule="evenodd"
-          />
-        </svg>
-
-        <p className="text-xl font-bold text-greenMedium ">Alan Brito Dulce</p>
+    <div className="mt-36 rounded-xl bg-gray-100 p-24 shadow-xl">
+      <div className="flex items-center justify-between">
+        <div className="w-1/2 border-r-2">
+          <UserCircleIcon className="mr-16 h-20 text-gray-500" />
+        </div>
+        <h1 className="ml-16 w-full text-4xl font-bold tracking-wide">
+          {' '}
+          John Doe
+        </h1>
       </div>
-      <div className="grid-cols-2 gap-2 p-8 sm:grid">
-        <div className="my-4">
-          <Input
-            errorMessage={errors.phone}
-            label="Teléfono"
-            name="phone"
-            type="text"
-            register={register}
-          />
+      <div className="mt-10 flex flex-col">
+        <div className="mt-6 flex items-center">
+          <h3 className="mr-4 text-lg  font-bold">Correo:</h3>
+          <h3 className="mr-auto text-lg">johndoe@vepeajes.com</h3>
+          <button type="button">
+            <PencilAltIcon className="h-5 text-gray-600 hover:text-emerald-500" />
+          </button>
         </div>
-        <div className="my-4">
-          <Input
-            errorMessage={errors.email}
-            label="Correo"
-            name="email"
-            type="email"
-            register={register}
-          />
+        <div className="mt-10 flex items-center">
+          <h3 className="mr-4 text-lg font-bold">Teléfono:</h3>
+          <h3 className="mr-auto text-lg">+58 (414)1234567</h3>
+          <PencilAltIcon className="h-5 text-gray-600 hover:text-emerald-500" />
         </div>
-
-        <div className="my-4">
-          <Input
-            errorMessage={errors.password}
-            label="Nueva contraseña"
-            name="password"
-            type="password"
-            register={register}
-          />
-        </div>
-
-        <div className="my-4">
-          <Input
-            errorMessage={errors.confirmPassword}
-            label="Confirmar contraseña"
-            name="confirmPassword"
-            type="password"
-            register={register}
-          />
-        </div>
-
-        <div className="my-4 ">
-          <Button
-            loading={false}
-            text="Enviar"
-            type="button"
-            onClick={() => console.log('hola')}
-          />
+        <div className="mt-10 flex items-center">
+          <h3 className="mr-4 text-lg font-bold">Contraseña:</h3>
+          <h3 className="mr-auto text-lg">password</h3>
+          <PencilAltIcon className="h-5 text-gray-600 hover:text-emerald-500" />
         </div>
       </div>
     </div>
