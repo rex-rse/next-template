@@ -12,9 +12,11 @@ import Input from '@components/inputs/Input';
 import { useForm } from 'react-hook-form';
 import { open } from '@store/counter/snackbarReducer';
 import Button from '@components/Button';
+import { useGuard } from 'hooks/useGuard';
 
 const Index = () => {
   const dispatch = useAppDispatch();
+  useGuard();
   const count = useAppSelector(selectCount);
   const { register } = useForm<any>({});
   const [loading, setLoading] = useState<boolean>(false);

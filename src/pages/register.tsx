@@ -12,10 +12,10 @@ const Register = () => {
     <div className="flex place-content-center bg-gradient-to-l from-emerald-700 to-emerald-100">
       <FooterLayout>
         <div className="mx-auto my-auto flex flex-col items-center justify-center rounded-2xl bg-white/75 p-10 shadow-2xl">
-          <h1 className="my-4 w-full text-3xl font-bold">
+          <h1 className="my-4 w-full text-3xl font-bold text-green-900">
             Bienvenido al sistema
           </h1>
-          <form className="mt-12">
+          <form className="mt-12 w-full">
             <div>
               <InputV2
                 label="Nombre"

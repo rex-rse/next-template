@@ -18,10 +18,10 @@ const Register = () => {
             <div className="w-full">
               <LogoDark className="mx-2 w-24" />
             </div>
-            <h1 className="my-4 w-full text-3xl font-bold">
+            <h1 className="my-4 w-full text-3xl font-bold text-green-900">
               Bienvenido al sistema
             </h1>
-            <form className="mt-12">
+            <form className="mt-12 w-full">
               <div className="mt-10">
                 <InputV2
                   label="Correo electrónico"
@@ -60,7 +60,7 @@ const Register = () => {
         </div>
       </FooterLayout>
       <div className=" hidden w-full lg:block">
-        <img className="aspect-1" src="/login.svg" alt="login" />
+        <img className="aspect-1 max-h-screen" src="/login.svg" alt="login" />
       </div>
     </div>
   );
