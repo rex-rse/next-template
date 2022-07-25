@@ -8,12 +8,23 @@ import { useAppDispatch } from '@store/hooks';
 import { useMutation } from 'react-query';
 import { AxiosError } from 'axios';
 import { open } from '@store/counter/snackbarReducer';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 interface Inputs {
   name: string;
   email: string;
   password: string;
 }
+const Schema = yup.object().shape({
+  name: yup.string().required('Este campo es requerido'),
+  email: yup.string().email().required('Este campo es requerido'),
+  password: yup
+    .string()
+    .min(8, 'Mínimo 8 caracteres')
+    .max(12, 'Máximo 12 caracteres')
+    .required('Este campo es requerido'),
+});
 
 const Register = () => {
   const router = useRouter();
@@ -44,12 +55,13 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    resolver: yupResolver(Schema),
+  });
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { email, password, name } = data;
     mutate({ email, password, name });
-    console.log(data);
   };
 
   return (

@@ -10,11 +10,22 @@ import { useAppDispatch } from '@store/hooks';
 import { login } from '@store/counter/loginReducer';
 import { open } from '@store/counter/snackbarReducer';
 import { AxiosError } from 'axios';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 interface Inputs {
   email: string;
   password: string;
 }
+
+const Schema = yup.object().shape({
+  email: yup.string().email().required('Este campo es requerido'),
+  password: yup
+    .string()
+    .min(8, 'Mínimo 8 caracteres')
+    .max(12, 'Máximo 12 caracteres')
+    .required('Este campo es requerido'),
+});
 
 const Register = () => {
   const router = useRouter();
@@ -44,12 +55,13 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    resolver: yupResolver(Schema),
+  });
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { email, password } = data;
     mutate({ email, password });
-    console.log(data);
   };
 
   return (

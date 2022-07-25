@@ -24,7 +24,7 @@ const Snackbar = () => {
       <div className="w-1/12">
         <CheckCircleIcon className="block h-6 w-6" aria-hidden="true" />
       </div>
-      <h1 className="mx-2 w-10/12">{text}</h1>
+      <h1 className="mx-2 w-10/12 text-white">{text}</h1>
       <button className="w-1/12">
         <XIcon
           className="block h-6 w-6"
