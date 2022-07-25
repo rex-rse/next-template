@@ -1,13 +1,57 @@
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import FooterLayout from '@layouts/FooterLayout';
 import InputV2 from '@components/inputs/InputV2';
+import { requester } from 'utils/requester';
+import { useRouter } from 'next/router';
+import { useAppDispatch } from '@store/hooks';
+import { useMutation } from 'react-query';
+import { AxiosError } from 'axios';
+import { open } from '@store/counter/snackbarReducer';
+
+interface Inputs {
+  name: string;
+  email: string;
+  password: string;
+}
 
 const Register = () => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { mutate, isLoading } = useMutation(
+    (formData: Inputs) => {
+      return requester({
+        method: 'POST',
+        data: formData,
+        url: '/account-holder/create/',
+      });
+    },
+    {
+      onSuccess: (response) => {
+        const { data } = response;
+        dispatch(open({ text: 'operacion exitosa', type: 'success' }));
+
+        router.push('/login');
+      },
+      onError: (error: AxiosError) => {
+        console.log(error.response.data);
+        dispatch(open({ text: error.response.statusText, type: 'error' }));
+      },
+    }
+  );
+
   const {
     register,
+    handleSubmit,
     formState: { errors },
-  } = useForm<any>({});
+  } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const { email, password, name } = data;
+    mutate({ email, password, name });
+    console.log(data);
+  };
+
   return (
     <div className="flex place-content-center bg-gradient-to-l from-emerald-700 to-emerald-100">
       <FooterLayout>
@@ -15,14 +59,13 @@ const Register = () => {
           <h1 className="my-4 w-full text-3xl font-bold text-green-900">
             Bienvenido al sistema
           </h1>
-          <form className="mt-12 w-full">
+          <form className="mt-12" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <InputV2
                 label="Nombre"
                 name="name"
                 type="text"
-                // error={true}
-                errorMessage="ads"
+                errorMessage={errors.name}
                 register={register}
               />
             </div>
@@ -31,8 +74,7 @@ const Register = () => {
                 label="Correo electrónico"
                 name="email"
                 type="text"
-                // error={true}
-                errorMessage="ads"
+                errorMessage={errors.email}
                 register={register}
               />
             </div>
@@ -41,8 +83,7 @@ const Register = () => {
                 label="Contraseña"
                 name="password"
                 type="password"
-                // error={true}
-                errorMessage="ads"
+                errorMessage={errors.password}
                 register={register}
               />
             </div>
