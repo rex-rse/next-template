@@ -1,14 +1,56 @@
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
 import FooterLayout from '@layouts/FooterLayout';
 import LogoDark from '@components/icons/LogoDark';
 import InputV2 from '@components/inputs/InputV2';
+import { useRouter } from 'next/router';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { useMutation } from 'react-query';
+import { requester } from 'utils/requester';
+import { useAppDispatch } from '@store/hooks';
+import { login } from '@store/counter/loginReducer';
+import { open } from '@store/counter/snackbarReducer';
+import { AxiosError } from 'axios';
+
+interface Inputs {
+  email: string;
+  password: string;
+}
 
 const Register = () => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { mutate, isLoading } = useMutation(
+    (formData: Inputs) => {
+      return requester({
+        method: 'POST',
+        data: formData,
+        url: '/login/',
+      });
+    },
+    {
+      onSuccess: (response) => {
+        const { data } = response;
+        console.log('response data', data);
+        dispatch(login(data));
+        router.push('/');
+      },
+      onError: (error: AxiosError) => {
+        console.log(error.response.data);
+        dispatch(open({ text: error.response.statusText, type: 'error' }));
+      },
+    }
+  );
   const {
     register,
+    handleSubmit,
     formState: { errors },
-  } = useForm<any>({});
+  } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const { email, password } = data;
+    mutate({ email, password });
+    console.log(data);
+  };
 
   return (
     <div className="flex items-center bg-gradient-to-l from-emerald-700 to-emerald-100">
@@ -21,14 +63,13 @@ const Register = () => {
             <h1 className="my-4 w-full text-3xl font-bold">
               Bienvenido al sistema
             </h1>
-            <form className="mt-12">
+            <form className="mt-12" onSubmit={handleSubmit(onSubmit)}>
               <div className="mt-10">
                 <InputV2
                   label="Correo electrónico"
                   name="email"
                   type="text"
-                  // error={true}
-                  errorMessage="ads"
+                  errorMessage={errors.email}
                   register={register}
                 />
               </div>
@@ -37,8 +78,7 @@ const Register = () => {
                   label="Contraseña"
                   name="password"
                   type="password"
-                  // error={true}
-                  errorMessage="ads"
+                  errorMessage={errors.password}
                   register={register}
                 />
               </div>

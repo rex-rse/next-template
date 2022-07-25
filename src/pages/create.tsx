@@ -16,7 +16,6 @@ interface Inputs {
 }
 
 const create = () => {
-  console.log('sssss');
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { mutate, isLoading, isError } = useMutation(

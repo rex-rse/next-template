@@ -12,7 +12,7 @@ interface TInputProps {
   labelClassName?: string;
 }
 
-const InputV2 = ({ label, type, name }: TInputProps) => {
+const InputV2 = ({ label, type, name, register }: TInputProps) => {
   return (
     <div className="relative">
       <input
@@ -21,6 +21,7 @@ const InputV2 = ({ label, type, name }: TInputProps) => {
         type={type}
         className="peer h-10 w-full border-0 border-b-2 border-gray-300 bg-white/0 text-gray-900 placeholder-transparent focus:border-emerald-600 focus:outline-none focus:ring-0"
         placeholder={label}
+        {...register(name)}
       />
       <label
         htmlFor={name}
