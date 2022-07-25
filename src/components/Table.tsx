@@ -27,18 +27,28 @@ const Table = ({ headers, data }: TableProps) => {
         <FilterIcon className="ml-8 mr-2 h-6 cursor-pointer text-gray-700 transition-colors delay-100 duration-200 hover:text-gray-500" />
       </div>
       <div className="hidden md:block">
-        <div className="table w-full bg-white">
-          <div className="table-header-group bg-gray-300 font-semibold uppercase tracking-wide text-black antialiased">
+        <div className="mb-6 table w-full rounded-xl bg-white shadow-lg">
+          <div className="table-header-group font-semibold uppercase tracking-wide text-black antialiased">
             <div className="table-row">
               {headers.map((header) => {
-                return (
-                  <div className="table-cell px-10 py-3" key={header.id}>
+                return header.id === '1' ? (
+                  <div
+                    className="table-cell rounded-tl-xl bg-emerald-700/30 py-5 pl-10"
+                    key={header.id}
+                  >
+                    {header.header}
+                  </div>
+                ) : (
+                  <div
+                    className="table-cell bg-emerald-700/30 py-5 pl-10"
+                    key={header.id}
+                  >
                     {header.header}
                   </div>
                 );
               })}
-              <div className="table-cell w-10 py-3 pl-10"></div>
-              <div className="table-cell w-10 px-10 py-3"></div>
+              <div className="table-cell w-10 bg-emerald-700/30 py-5 pl-10"></div>
+              <div className="table-cell w-10 rounded-tr-xl bg-emerald-700/30 px-7 py-5"></div>
             </div>
           </div>
           <div className="table-row-group font-medium tracking-wide text-black antialiased">
@@ -49,14 +59,14 @@ const Table = ({ headers, data }: TableProps) => {
                     const value = row[headerKey];
                     return (
                       <div
-                        className="table-cell border-b px-10 py-4"
+                        className="table-cell border-t py-4 pl-10"
                         key={headerKey}
                       >
                         {value}
                       </div>
                     );
                   })}
-                  <div className="table-cell border-b py-4">
+                  <div className="table-cell border-t py-4">
                     <a
                       href="#"
                       className="font-medium text-blue-400 transition-colors delay-100 duration-200 hover:text-blue-500"
@@ -64,7 +74,7 @@ const Table = ({ headers, data }: TableProps) => {
                       <EyeIcon className="h-5 w-5" />
                     </a>
                   </div>
-                  <div className="table-cell border-b py-4">
+                  <div className="table-cell border-t py-4">
                     <a
                       href="#"
                       className="font-medium text-red-400 transition-colors delay-100 duration-200 hover:text-red-500"
