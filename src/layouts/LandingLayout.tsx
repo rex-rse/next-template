@@ -25,11 +25,11 @@ const LandingLayout = ({ children }: TLandingLayout) => {
   ];
 
   return (
-    <div className="h-screen bg-gray-200">
-      <Disclosure as="nav" className="bg-emerald-800">
+    <div className="min-h-screen bg-gray-200">
+      <Disclosure as="nav" className="bg-gradient-to-l from-emerald-700 to-emerald-600">
         {({ open }) => (
           <>
-            <div className="mx-auto px-2 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-5xl px-2">
               <div className="relative flex h-16 items-center justify-between">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button*/}
@@ -53,9 +53,9 @@ const LandingLayout = ({ children }: TLandingLayout) => {
                           <button
                             className={classNames(
                               item.href === router.asPath
-                                ? 'pointer-events-none bg-emerald-600/70 text-white'
+                                ? 'pointer-events-none bg-emerald-700 text-white'
                                 : 'text-white hover:bg-emerald-600/70 hover:text-white hover:shadow-xl',
-                              'border-x border-emerald-800 p-5 font-semibold uppercase tracking-wider antialiased transition-all delay-100 duration-200'
+                              ' p-5 font-semibold uppercase tracking-wider antialiased transition-all delay-100 duration-200 focus:ring-opacity-80'
                             )}
                             aria-current={
                               item.href === router.asPath ? 'page' : undefined
@@ -109,7 +109,7 @@ const LandingLayout = ({ children }: TLandingLayout) => {
           </>
         )}
       </Disclosure>
-      <main className=" flex h-full items-start justify-center">
+      <main className=" flex items-start justify-center max-w-5xl mx-auto">
         {children}
       </main>
     </div>

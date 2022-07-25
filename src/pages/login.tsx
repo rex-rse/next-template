@@ -55,12 +55,12 @@ const Register = () => {
   return (
     <div className="flex items-center bg-gradient-to-l from-emerald-700 to-emerald-100">
       <FooterLayout>
-        <div className="mx-auto my-auto flex max-w-xs flex-col items-center justify-center rounded-2xl bg-white/75 p-10 shadow-2xl">
+        <div className="mx-auto my-auto flex flex-col items-center justify-center rounded-2xl bg-white/75 p-10 shadow-2xl">
           <div>
             <div className="w-full">
               <LogoDark className="mx-2 w-24" />
             </div>
-            <h1 className="my-4 w-full text-3xl font-bold">
+            <h1 className="my-4 w-full text-3xl font-bold text-green-900">
               Bienvenido al sistema
             </h1>
             <form className="mt-12" onSubmit={handleSubmit(onSubmit)}>
@@ -100,7 +100,7 @@ const Register = () => {
         </div>
       </FooterLayout>
       <div className=" hidden w-full lg:block">
-        <img className="aspect-1" src="/login.svg" alt="login" />
+        <img className="aspect-1 max-h-screen" src="/login.svg" alt="login" />
       </div>
     </div>
   );
