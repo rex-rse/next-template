@@ -12,6 +12,7 @@ import { open } from '@store/counter/snackbarReducer';
 import { AxiosError } from 'axios';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import Input from '@components/inputs/Input';
 
 interface Inputs {
   email: string;
@@ -19,7 +20,7 @@ interface Inputs {
 }
 
 const Schema = yup.object().shape({
-  email: yup.string().email().required('Este campo es requerido'),
+  email: yup.string().email('Debe ser un correo válido').required('Este campo es requerido'),
   password: yup
     .string()
     .min(8, 'Mínimo 8 caracteres')
@@ -72,32 +73,36 @@ const Register = () => {
             <div className="w-full">
               <LogoDark className="mx-2 w-24" />
             </div>
-            <h1 className="my-4 w-full text-3xl font-bold text-green-900">
+            <h1 className="my-4 w-full text-3xl font-bold text-emerald-900">
               Bienvenido al sistema
             </h1>
-            <form className="mt-12" onSubmit={handleSubmit(onSubmit)}>
-              <div className="mt-10">
+            <form
+              className="mt-12"
+              onSubmit={handleSubmit(onSubmit)}
+              
+            >
+              <div className="mt-16">
                 <InputV2
                   label="Correo electrónico"
                   name="email"
                   type="text"
-                  errorMessage={errors.email}
+                  errorMessage={errors.email?.message}
                   register={register}
                 />
               </div>
-              <div className="mt-10">
+              <div className="mt-16">
                 <InputV2
                   label="Contraseña"
                   name="password"
                   type="password"
-                  errorMessage={errors.password}
+                  errorMessage={errors.password?.message}
                   register={register}
                 />
               </div>
               <input
                 type="submit"
                 value="Ingresar"
-                className="mt-16 block w-full cursor-pointer rounded bg-emerald-600/70 px-4 py-2 text-center font-semibold text-white shadow-md hover:bg-emerald-600/50 focus:outline-none focus:ring focus:ring-emerald-600/50 focus:ring-opacity-80 focus:ring-offset-2"
+                className="mt-20 block w-full cursor-pointer rounded bg-emerald-600/70 px-4 py-2 text-center font-semibold text-white shadow-md hover:bg-emerald-600/50 focus:outline-none focus:ring focus:ring-emerald-600/50 focus:ring-opacity-80 focus:ring-offset-2"
               />
             </form>
             <Link href="register">
