@@ -33,22 +33,22 @@ const Table = ({ headers, data }: TableProps) => {
               {headers.map((header) => {
                 return header.id === '1' ? (
                   <div
-                    className="table-cell rounded-tl-xl bg-emerald-700/30 py-5 pl-10"
+                    className="table-cell rounded-tl-xl bg-emerald-600/40 py-5 pl-10"
                     key={header.id}
                   >
                     {header.header}
                   </div>
                 ) : (
                   <div
-                    className="table-cell bg-emerald-700/30 py-5 pl-10"
+                    className="table-cell bg-emerald-600/40 py-5 pl-10"
                     key={header.id}
                   >
                     {header.header}
                   </div>
                 );
               })}
-              <div className="table-cell w-10 bg-emerald-700/30 py-5 pl-10"></div>
-              <div className="table-cell w-10 rounded-tr-xl bg-emerald-700/30 px-7 py-5"></div>
+              <div className="table-cell w-10 bg-emerald-600/40 py-5 pl-10"></div>
+              <div className="table-cell w-10 rounded-tr-xl bg-emerald-600/40 px-7 py-5"></div>
             </div>
           </div>
           <div className="table-row-group font-medium tracking-wide text-black antialiased">
