@@ -1,5 +1,5 @@
-import React from 'react';
-import { EyeIcon, XIcon, FilterIcon } from '@heroicons/react/solid';
+import React, { useState } from 'react';
+import { EyeIcon, EyeOffIcon, XIcon, FilterIcon } from '@heroicons/react/solid';
 import { SearchIcon } from '@heroicons/react/outline';
 
 interface TableProps {
@@ -9,6 +9,7 @@ interface TableProps {
 }
 
 const Table = ({ headers, data }: TableProps) => {
+  const [isViewable, setIsViewable] = useState(true);
   const headerKeys: any[] = [];
 
   for (const header of headers) {
@@ -47,13 +48,12 @@ const Table = ({ headers, data }: TableProps) => {
                   </div>
                 );
               })}
-              <div className="table-cell w-10 bg-emerald-600/40 py-5 pl-10"></div>
               <div className="table-cell w-10 rounded-tr-xl bg-emerald-600/40 px-7 py-5"></div>
             </div>
           </div>
           <div className="table-row-group font-medium tracking-wide text-black antialiased">
             {data.map((row) => {
-              return (
+              return !row.disabled ? (
                 <div className="table-row" key={row.id}>
                   {headerKeys.map((headerKey) => {
                     const value = row[headerKey];
@@ -67,22 +67,25 @@ const Table = ({ headers, data }: TableProps) => {
                     );
                   })}
                   <div className="table-cell border-t py-4">
-                    <a
-                      href="#"
-                      className="font-medium text-blue-400 transition-colors delay-100 duration-200 hover:text-blue-500"
+                    <button
+                      type="button"
+                      onClick={() => {
+                        row.disabled
+                          ? (row.disabled = false)
+                          : (row.disabled = true);
+                      }}
+                      className="font-medium text-emerald-700/70 transition-colors delay-100 duration-200 hover:text-emerald-500/70"
                     >
-                      <EyeIcon className="h-5 w-5" />
-                    </a>
-                  </div>
-                  <div className="table-cell border-t py-4">
-                    <a
-                      href="#"
-                      className="font-medium text-red-400 transition-colors delay-100 duration-200 hover:text-red-500"
-                    >
-                      <XIcon className="h-5 w-5" />
-                    </a>
+                      {row.disabled ? (
+                        <EyeOffIcon className="h-5 w-5" />
+                      ) : (
+                        <EyeIcon className="h-5 w-5" />
+                      )}
+                    </button>
                   </div>
                 </div>
+              ) : (
+                null
               );
             })}
           </div>
@@ -102,7 +105,7 @@ const Table = ({ headers, data }: TableProps) => {
                 href="#"
                 className="font-medium text-blue-400 hover:text-blue-500 "
               >
-                <EyeIcon className="h-5 w-5" />
+                <EyeOffIcon className="h-5 w-5" />
               </a>
               <a
                 href="#"
@@ -130,7 +133,7 @@ const Table = ({ headers, data }: TableProps) => {
                 href="#"
                 className="font-medium text-blue-400 hover:text-blue-500 "
               >
-                <EyeIcon className="h-5 w-5" />
+                <EyeOffIcon className="h-5 w-5" />
               </a>
               <a
                 href="#"
@@ -158,7 +161,7 @@ const Table = ({ headers, data }: TableProps) => {
                 href="#"
                 className="font-medium text-blue-400 hover:text-blue-500 "
               >
-                <EyeIcon className="h-5 w-5" />
+                <EyeOffIcon className="h-5 w-5" />
               </a>
               <a
                 href="#"

@@ -40,7 +40,7 @@ const Recharge = () => {
         <div className="p-2 md:w-1/3">
           <Card
             title="Viajes"
-            data="50Bs"
+            data="30"
             icon={
               <SupportIcon
                 className="m-1.5 block h-16 sm:m-4 sm:h-24 md:m-1.5 lg:h-20"

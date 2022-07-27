@@ -48,6 +48,7 @@ const Vehicles = () => {
       last_used: 'DD/MM/AA',
       medium: 'QR',
       test: 'test',
+      disabled: false,
     },
     {
       id: '2',
@@ -58,6 +59,7 @@ const Vehicles = () => {
       last_used: 'DD/MM/AA',
       plate_number: 'AA4-B44',
       medium: 'QR',
+      disabled: false,
     },
     {
       id: '3',
@@ -68,6 +70,7 @@ const Vehicles = () => {
       plate_number: '1234567',
       medium: 'Medio1',
       test2: 'test23',
+      disabled: true,
     },
     {
       id: '4',
@@ -78,6 +81,7 @@ const Vehicles = () => {
       last_used: 'DD/MM/AA',
       plate_number: 'AA4-B44',
       medium: 'QR',
+      disabled: false,
     },
     {
       id: '5',
@@ -88,6 +92,7 @@ const Vehicles = () => {
       last_used: 'DD/MM/AA',
       plate_number: 'AA4-B44',
       medium: 'QR',
+      disabled: false,
     },
     {
       id: '6',
@@ -98,6 +103,7 @@ const Vehicles = () => {
       last_used: 'DD/MM/AA',
       plate_number: 'AA4-B44',
       medium: 'QR',
+      disabled: false,
     },
     {
       id: '7',
@@ -108,6 +114,7 @@ const Vehicles = () => {
       last_used: 'DD/MM/AA',
       plate_number: 'AA4-B44',
       medium: 'QR',
+      disabled: false,
     },
     {
       id: '8',
@@ -118,6 +125,7 @@ const Vehicles = () => {
       last_used: 'DD/MM/AA',
       plate_number: 'AA4-B44',
       medium: 'QR',
+      disabled: false,
     },
     {
       id: '9',
@@ -128,6 +136,7 @@ const Vehicles = () => {
       last_used: 'DD/MM/AA',
       plate_number: 'AA4-B44',
       medium: 'QR',
+      disabled: false,
     },
     {
       id: '10',
@@ -138,6 +147,7 @@ const Vehicles = () => {
       last_used: 'DD/MM/AA',
       plate_number: 'AA4-B44',
       medium: 'QR',
+      disabled: false,
     },
     {
       id: '11',
@@ -148,6 +158,7 @@ const Vehicles = () => {
       last_used: 'DD/MM/AA',
       plate_number: 'AA4-B44',
       medium: 'QR',
+      disabled: false,
     },
     {
       id: '12',
@@ -158,6 +169,7 @@ const Vehicles = () => {
       last_used: 'DD/MM/AA',
       plate_number: 'AA4-B44',
       medium: 'QR',
+      disabled: false,
     },
     {
       id: '13',
@@ -168,6 +180,7 @@ const Vehicles = () => {
       last_used: 'DD/MM/AA',
       plate_number: 'AA4-B44',
       medium: 'QR',
+      disabled: false,
     },
     {
       id: '14',
@@ -178,6 +191,7 @@ const Vehicles = () => {
       last_used: 'DD/MM/AA',
       plate_number: 'AA4-B44',
       medium: 'QR',
+      disabled: false,
     },
   ];
 
