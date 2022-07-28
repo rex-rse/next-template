@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { EyeIcon, EyeOffIcon, XIcon, FilterIcon } from '@heroicons/react/solid';
 import { SearchIcon } from '@heroicons/react/outline';
 
@@ -9,7 +9,6 @@ interface TableProps {
 }
 
 const Table = ({ headers, data }: TableProps) => {
-  const [isViewable, setIsViewable] = useState(true);
   const headerKeys: any[] = [];
 
   for (const header of headers) {
@@ -85,7 +84,40 @@ const Table = ({ headers, data }: TableProps) => {
                   </div>
                 </div>
               ) : (
-                null
+                <div
+                  className="table-row bg-gray-200/70 text-gray-400 transition-colors delay-100 duration-200"
+                  key={row.id}
+                >
+                  {headerKeys.map((headerKey) => {
+                    const value = row[headerKey];
+                    return (
+                      <div
+                        className="table-cell border-t py-4 pl-10"
+                        key={headerKey}
+                      >
+                        {value}
+                      </div>
+                    );
+                  })}
+                  <div className="table-cell border-t py-4">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        row.disabled
+                          ? (row.disabled = false)
+                          : (row.disabled = true);
+                        console.log(row);
+                      }}
+                      className="font-medium text-emerald-700/50 transition-colors delay-100 duration-200 hover:text-emerald-500/70"
+                    >
+                      {row.disabled ? (
+                        <EyeOffIcon className="h-5 w-5" />
+                      ) : (
+                        <EyeIcon className="h-5 w-5" />
+                      )}
+                    </button>
+                  </div>
+                </div>
               );
             })}
           </div>
