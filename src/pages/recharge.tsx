@@ -9,7 +9,7 @@ import Payments from '@components/Payments';
 const Recharge = () => {
   const [loading, setLoading] = useState<boolean>(false);
   return (
-    <div className="grow">
+    <div className="grow mt-12">
       <div className="flex-wrap p-4 md:flex md:justify-between">
         <div className="p-2 md:w-1/3">
           <Card
