@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { EyeIcon, EyeOffIcon, XIcon, FilterIcon } from '@heroicons/react/solid';
 import { SearchIcon } from '@heroicons/react/outline';
 
@@ -9,8 +9,8 @@ interface TableProps {
 }
 
 const Table = ({ headers, data }: TableProps) => {
-  const headerKeys: any[] = [];
 
+  const headerKeys: any[] = [];
   for (const header of headers) {
     headerKeys.push(header.key);
   }
@@ -18,11 +18,13 @@ const Table = ({ headers, data }: TableProps) => {
   return (
     <div className="w-full">
       <div className="flex items-center p-6">
-        <div className="mr-auto flex grow items-center space-x-3 rounded-lg bg-gray-50 py-2 pl-10">
-          <SearchIcon className="h-4" />
-          <h2 className="text-left font-semibold tracking-wide antialiased">
-            Search . . .
-          </h2>
+        <div className="mr-auto flex grow items-center space-x-3 rounded-lg bg-gray-50 py-2 pl-6">
+          <SearchIcon className="h-5" />
+          <input
+            type="text"
+            className="w-full border-none bg-transparent focus:outline-none focus:ring-0"
+            placeholder='Buscar . . .'
+          />
         </div>
         <FilterIcon className="ml-8 mr-2 h-6 cursor-pointer text-gray-700 transition-colors delay-100 duration-200 hover:text-gray-500" />
       </div>
