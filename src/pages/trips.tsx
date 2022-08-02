@@ -2,7 +2,7 @@ import React, { ReactElement, useState } from 'react';
 import LandingLayout from '@layouts/LandingLayout';
 import Table from '@components/Table';
 
-const Vehicles = () => {
+const Trips = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const headers = [
@@ -198,15 +198,15 @@ const Vehicles = () => {
   return (
     <div className="mt-6 h-full w-full space-y-6">
       <h2 className="text-2xl tracking-wide text-gray-800">
-        Historial de Vehículos Asociados
+        Historial de Viajes
       </h2>
       <Table headers={headers} data={data} />
     </div>
   );
 };
 
-Vehicles.getLayout = function getLayout(page: ReactElement) {
+Trips.getLayout = function getLayout(page: ReactElement) {
   return <LandingLayout>{page}</LandingLayout>;
 };
 
-export default Vehicles;
+export default Trips;
