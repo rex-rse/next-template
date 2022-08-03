@@ -21,7 +21,7 @@ const Recharge = () => {
                 aria-hidden="true"
               />
             }
-            href="#"
+            href="/balance"
           />
         </div>
         <div className="p-2 md:w-1/3">
@@ -47,7 +47,7 @@ const Recharge = () => {
                 aria-hidden="true"
               />
             }
-            href="#"
+            href="/trip"
           />
         </div>
       </div>
