@@ -10,7 +10,7 @@ import { useAppDispatch } from '@store/hooks';
 import { AxiosError } from 'axios';
 import { open } from '@store/counter/snackbarReducer';
 import { UserCircleIcon, PencilAltIcon } from '@heroicons/react/solid';
-import { Transition } from '@headlessui/react';
+import { useSelector } from 'react-redux';
 
 interface Inputs {
   password: string;
@@ -19,11 +19,9 @@ interface Inputs {
 const Schema = yup.object().shape({
   phone_number: yup
     .number()
-    .test(
-      'len',
-      'Debe ser 11 dígitos',
-      (val) => val.toString().length === 11
-    )
+    // .test('len', 'Debe ser 11 dígitos', (val) => val.toString().length === 11)
+    .max(11, 'Deben ser 11 dígitos')
+    .min(11, 'Deben ser 11 dígitos')
     .typeError('Debe ser un número')
     .required('Este campo es requerido'),
   password: yup
@@ -39,6 +37,17 @@ const Schema = yup.object().shape({
 
 const User = () => {
   const [isEditable, setIsEditable] = useState(false);
+  const name = useSelector(
+    (state: any) => state.loginUser.user_info.first_name
+  );
+  const lastName = useSelector(
+    (state: any) => state.loginUser.user_info.last_name
+  );
+  const email = useSelector((state: any) => state.loginUser.user_info.email);
+
+  const phoneNumber = useSelector(
+    (state: any) => state.loginUser.user_info.phone_number
+  );
 
   const dispatch = useAppDispatch();
   const { mutate, isLoading } = useMutation(
@@ -81,13 +90,13 @@ const User = () => {
           <UserCircleIcon className="mr-16 h-20 pr-10 text-gray-500" />
         </div>
         <h1 className="ml-16 w-full text-center text-4xl font-bold tracking-wide">
-          John Doe
+          {name} {''} {lastName}
         </h1>
       </div>
       <div className="mt-16 flex flex-col">
         <div className="mt-6 flex items-center">
           <h3 className="mr-4 text-lg  font-bold">Correo:</h3>
-          <h3 className="mr-auto text-lg">johndoe@vepeajes.com</h3>
+          <h3 className="mr-auto text-lg">{email}</h3>
         </div>
         <div className="mt-10 flex items-start">
           {isEditable ? (
@@ -132,7 +141,7 @@ const User = () => {
           ) : (
             <>
               <h3 className="mr-4 text-lg font-bold">Teléfono:</h3>
-              <h3 className="mr-auto text-lg">+58 (414)1234567</h3>
+              <h3 className="mr-auto text-lg">{phoneNumber}</h3>
             </>
           )}
 

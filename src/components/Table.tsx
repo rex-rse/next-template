@@ -9,7 +9,6 @@ interface TableProps {
 }
 
 const Table = ({ headers, data }: TableProps) => {
-
   const headerKeys: any[] = [];
   for (const header of headers) {
     headerKeys.push(header.key);
@@ -42,7 +41,7 @@ const Table = ({ headers, data }: TableProps) => {
             </div>
           </div>
           <div className="table-row-group  text-black antialiased">
-            {data.map((row) => {
+            {data?.map((row) => {
               return !row.disabled ? (
                 <div className="table-row" key={row.id}>
                   {headerKeys.map((headerKey) => {
@@ -79,7 +78,7 @@ const Table = ({ headers, data }: TableProps) => {
                   className="table-row bg-gray-200/70 text-gray-400 transition-colors delay-100 duration-200"
                   key={row.id}
                 >
-                  {headerKeys.map((headerKey) => {
+                  {headerKeys?.map((headerKey) => {
                     const value = row[headerKey];
                     return (
                       <div
