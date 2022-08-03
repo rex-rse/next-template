@@ -1,20 +1,20 @@
+import React, { ReactElement, useState, useEffect } from 'react';
+import Link from 'next/link';
 import LandingLayout from '@layouts/LandingLayout';
-import Card from '@components/Card';
-import Button from '@components/Button';
-import React, { ReactElement, useState } from 'react';
+import Table from '@components/Table';
+import { Switch } from '@headlessui/react';
 import {
   TruckIcon,
   CashIcon,
   SupportIcon,
   ChevronRightIcon,
+  XIcon,
 } from '@heroicons/react/outline';
-import MainCard from '@components/MainCard';
-import Payments from '@components/Payments';
-import Table from '@components/Table';
-import Link from 'next/link';
 
 const Index = () => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [enabled, setEnabled] = useState(false);
+  const [rows, setRows] = useState([]);
 
   const headers = [
     {
@@ -46,6 +46,11 @@ const Index = () => {
       id: '6',
       key: 'last_used',
       header: 'Último uso',
+    },
+    {
+      id: '7',
+      key: 'actions',
+      header: '',
     },
   ];
 
@@ -206,6 +211,42 @@ const Index = () => {
     },
   ];
 
+  useEffect(() => {
+    const rows = data.map(
+      ({ id, brand, model, plate_number, medium, last_toll, last_used }) => {
+        return {
+          id,
+          brand,
+          model,
+          plate_number,
+          medium,
+          last_toll,
+          last_used,
+          actions: (
+            <div className="flex items-center space-x-3">
+              <Switch
+                checked={enabled}
+                onChange={setEnabled}
+                className={`${
+                  enabled ? 'bg-emerald-700/50' : 'bg-gray-200'
+                } relative inline-flex h-6 w-11 items-center rounded-full`}
+              >
+                <span className="sr-only">Deshabilitar vehículo</span>
+                <span
+                  className={`transform transition duration-200 ease-in-out ${
+                    enabled ? 'translate-x-6' : 'translate-x-1'
+                  } inline-block h-4 w-4 transform rounded-full bg-white`}
+                />
+              </Switch>
+              <XIcon className="h-6 text-rose-400" />
+            </div>
+          ),
+        };
+      }
+    );
+    setRows(rows);
+  });
+
   return (
     <div className="mt-8 w-full">
       <div className="mb-10 space-y-8">
@@ -275,7 +316,7 @@ const Index = () => {
         <h2 className="text-2xl tracking-wide text-gray-800">
           Vehículos Asociados
         </h2>
-        <Table headers={headers} data={data} />
+        <Table headers={headers} data={rows} />
       </div>
     </div>
   );

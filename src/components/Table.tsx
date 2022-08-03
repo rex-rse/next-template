@@ -9,7 +9,6 @@ interface TableProps {
 }
 
 const Table = ({ headers, data }: TableProps) => {
-
   const headerKeys: any[] = [];
   for (const header of headers) {
     headerKeys.push(header.key);
@@ -29,6 +28,13 @@ const Table = ({ headers, data }: TableProps) => {
                   >
                     {header.header}
                   </div>
+                ) : header.id == headers.length ? (
+                  <div
+                    className="table-cell rounded-tr-lg bg-emerald-600/30 px-10 py-4"
+                    key={header.id}
+                  >
+                    {header.header}
+                  </div>
                 ) : (
                   <div
                     className="table-cell bg-emerald-600/30 py-4 pl-10"
@@ -38,12 +44,11 @@ const Table = ({ headers, data }: TableProps) => {
                   </div>
                 );
               })}
-              <div className="table-cell w-10 rounded-tr-lg bg-emerald-600/30 px-7 py-4"></div>
             </div>
           </div>
           <div className="table-row-group  text-black antialiased">
             {data.map((row) => {
-              return !row.disabled ? (
+              return (
                 <div className="table-row" key={row.id}>
                   {headerKeys.map((headerKey) => {
                     const value = row[headerKey];
@@ -56,58 +61,6 @@ const Table = ({ headers, data }: TableProps) => {
                       </div>
                     );
                   })}
-                  <div className="table-cell border-t py-4">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        row.disabled
-                          ? (row.disabled = false)
-                          : (row.disabled = true);
-                      }}
-                      className="font-medium text-emerald-700/70 transition-colors delay-100 duration-200 hover:text-emerald-500/70"
-                    >
-                      {row.disabled ? (
-                        <EyeOffIcon className="h-5 w-5" />
-                      ) : (
-                        <EyeIcon className="h-5 w-5" />
-                      )}
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div
-                  className="table-row bg-gray-200/70 text-gray-400 transition-colors delay-100 duration-200"
-                  key={row.id}
-                >
-                  {headerKeys.map((headerKey) => {
-                    const value = row[headerKey];
-                    return (
-                      <div
-                        className="table-cell border-t py-4 pl-10"
-                        key={headerKey}
-                      >
-                        {value}
-                      </div>
-                    );
-                  })}
-                  <div className="table-cell border-t py-4">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        row.disabled
-                          ? (row.disabled = false)
-                          : (row.disabled = true);
-                        console.log(row);
-                      }}
-                      className="font-medium text-emerald-700/50 transition-colors delay-100 duration-200 hover:text-emerald-500/70"
-                    >
-                      {row.disabled ? (
-                        <EyeOffIcon className="h-5 w-5" />
-                      ) : (
-                        <EyeIcon className="h-5 w-5" />
-                      )}
-                    </button>
-                  </div>
                 </div>
               );
             })}

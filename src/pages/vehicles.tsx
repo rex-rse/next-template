@@ -1,9 +1,13 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import LandingLayout from '@layouts/LandingLayout';
 import Table from '@components/Table';
+import { Switch } from '@headlessui/react';
+import { XIcon } from '@heroicons/react/outline';
 
 const Vehicles = () => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [enabled, setEnabled] = useState(false);
+  const [rows, setRows] = useState([]);
 
   const headers = [
     {
@@ -35,6 +39,11 @@ const Vehicles = () => {
       id: '6',
       key: 'last_used',
       header: 'Último uso',
+    },
+    {
+      id: '7',
+      key: 'actions',
+      header: '',
     },
   ];
 
@@ -195,12 +204,48 @@ const Vehicles = () => {
     },
   ];
 
+  useEffect(() => {
+    const rows = data.map(
+      ({ id, brand, model, plate_number, medium, last_toll, last_used }) => {
+        return {
+          id,
+          brand,
+          model,
+          plate_number,
+          medium,
+          last_toll,
+          last_used,
+          actions: (
+            <div className='flex items-center space-x-3'>
+              <Switch
+                checked={enabled}
+                onChange={setEnabled}
+                className={`${
+                  enabled ? 'bg-emerald-700/50' : 'bg-gray-200'
+                } relative inline-flex h-6 w-11 items-center rounded-full`}
+              >
+                <span className="sr-only">Enable notifications</span>
+                <span
+                  className={`transform transition duration-200 ease-in-out ${
+                    enabled ? 'translate-x-6' : 'translate-x-1'
+                  } inline-block h-4 w-4 transform rounded-full bg-white`}
+                />
+              </Switch>
+              <XIcon className='h-6 text-rose-400'/>
+            </div>
+          ),
+        };
+      }
+    );
+    setRows(rows);
+  });
+
   return (
     <div className="mt-6 h-full w-full space-y-6">
       <h2 className="text-2xl tracking-wide text-gray-800">
         Historial de Vehículos Asociados
       </h2>
-      <Table headers={headers} data={data} />
+      <Table headers={headers} data={rows} />
     </div>
   );
 };
