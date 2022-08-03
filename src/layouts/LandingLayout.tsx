@@ -19,21 +19,25 @@ const LandingLayout = ({ children }: TLandingLayout) => {
   const router = useRouter();
   const navigation = [
     { name: 'Inicio', href: '/' },
-    { name: 'Recargas', href: '/recharge' },
+    { name: 'Recargas', href: '/recharges' },
     { name: 'Vehículos', href: '/vehicles' },
+    { name: 'Viajes', href: '/trips' },
     // { name: 'Calendar', href: '#' },
   ];
 
   return (
     <div className="min-h-screen bg-gray-200">
-      <Disclosure as="nav" className="bg-gradient-to-l from-emerald-700 to-emerald-600">
+      <Disclosure as="nav" className="bg-emerald-700/90 bg-gradient-to-l">
         {({ open }) => (
           <>
-            <div className="mx-auto max-w-5xl px-2">
+            <div className="mx-auto px-2 sm:px-24">
               <div className="relative flex h-16 items-center justify-between">
+                <h1 className="hidden text-xl uppercase text-white sm:block">
+                  vepeajes
+                </h1>
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button*/}
-                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-greenLight focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -53,9 +57,9 @@ const LandingLayout = ({ children }: TLandingLayout) => {
                           <button
                             className={classNames(
                               item.href === router.asPath
-                                ? 'pointer-events-none bg-emerald-700 text-white'
-                                : 'text-white hover:bg-emerald-600/70 hover:text-white hover:shadow-xl',
-                              ' p-5 font-semibold uppercase tracking-wider antialiased transition-all delay-100 duration-200 focus:ring-opacity-80'
+                                ? 'pointer-events-none bg-emerald-400/40 text-white'
+                                : 'text-white hover:bg-emerald-500/40 hover:text-white hover:shadow-xl',
+                              ' p-5 font-medium uppercase tracking-wider antialiased transition-all delay-100 duration-200 focus:ring-opacity-80'
                             )}
                             aria-current={
                               item.href === router.asPath ? 'page' : undefined
@@ -93,8 +97,8 @@ const LandingLayout = ({ children }: TLandingLayout) => {
                     href={item.href}
                     className={classNames(
                       item.href === router.asPath
-                        ? 'pointer-events-none bg-emerald-600/70 text-white'
-                        : 'text-white hover:bg-emerald-600/70',
+                        ? 'pointer-events-none bg-emerald-400/40 text-white'
+                        : 'text-white hover:bg-emerald-400/40',
                       'block rounded-md px-3 py-2 text-base font-medium'
                     )}
                     aria-current={
@@ -109,7 +113,7 @@ const LandingLayout = ({ children }: TLandingLayout) => {
           </>
         )}
       </Disclosure>
-      <main className=" flex items-start justify-center max-w-5xl mx-auto">
+      <main className=" mx-auto flex max-w-5xl items-start justify-center">
         {children}
       </main>
     </div>

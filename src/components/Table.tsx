@@ -9,49 +9,39 @@ interface TableProps {
 }
 
 const Table = ({ headers, data }: TableProps) => {
-  const [isViewable, setIsViewable] = useState(true);
-  const headerKeys: any[] = [];
 
+  const headerKeys: any[] = [];
   for (const header of headers) {
     headerKeys.push(header.key);
   }
 
   return (
-    <div className="w-full">
-      <div className="flex items-center p-6">
-        <div className="mr-auto flex grow items-center space-x-3 rounded-lg bg-gray-50 py-2 pl-10">
-          <SearchIcon className="h-4" />
-          <h2 className="text-left font-semibold tracking-wide antialiased">
-            Search . . .
-          </h2>
-        </div>
-        <FilterIcon className="ml-8 mr-2 h-6 cursor-pointer text-gray-700 transition-colors delay-100 duration-200 hover:text-gray-500" />
-      </div>
+    <div className=" w-full">
       <div className="hidden md:block">
-        <div className="mb-6 table w-full rounded-xl bg-white shadow-lg">
-          <div className="table-header-group font-semibold uppercase tracking-wide text-black antialiased">
+        <div className="text-md mb-6 table w-full rounded-lg bg-white shadow-md">
+          <div className="table-header-group font-medium uppercase text-gray-800 antialiased">
             <div className="table-row">
               {headers.map((header) => {
                 return header.id === '1' ? (
                   <div
-                    className="table-cell rounded-tl-xl bg-emerald-600/40 py-5 pl-10"
+                    className="table-cell rounded-tl-lg bg-emerald-600/30 py-4 pl-10"
                     key={header.id}
                   >
                     {header.header}
                   </div>
                 ) : (
                   <div
-                    className="table-cell bg-emerald-600/40 py-5 pl-10"
+                    className="table-cell bg-emerald-600/30 py-4 pl-10"
                     key={header.id}
                   >
                     {header.header}
                   </div>
                 );
               })}
-              <div className="table-cell w-10 rounded-tr-xl bg-emerald-600/40 px-7 py-5"></div>
+              <div className="table-cell w-10 rounded-tr-lg bg-emerald-600/30 px-7 py-4"></div>
             </div>
           </div>
-          <div className="table-row-group font-medium tracking-wide text-black antialiased">
+          <div className="table-row-group  text-black antialiased">
             {data.map((row) => {
               return !row.disabled ? (
                 <div className="table-row" key={row.id}>
@@ -85,7 +75,40 @@ const Table = ({ headers, data }: TableProps) => {
                   </div>
                 </div>
               ) : (
-                null
+                <div
+                  className="table-row bg-gray-200/70 text-gray-400 transition-colors delay-100 duration-200"
+                  key={row.id}
+                >
+                  {headerKeys.map((headerKey) => {
+                    const value = row[headerKey];
+                    return (
+                      <div
+                        className="table-cell border-t py-4 pl-10"
+                        key={headerKey}
+                      >
+                        {value}
+                      </div>
+                    );
+                  })}
+                  <div className="table-cell border-t py-4">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        row.disabled
+                          ? (row.disabled = false)
+                          : (row.disabled = true);
+                        console.log(row);
+                      }}
+                      className="font-medium text-emerald-700/50 transition-colors delay-100 duration-200 hover:text-emerald-500/70"
+                    >
+                      {row.disabled ? (
+                        <EyeOffIcon className="h-5 w-5" />
+                      ) : (
+                        <EyeIcon className="h-5 w-5" />
+                      )}
+                    </button>
+                  </div>
+                </div>
               );
             })}
           </div>
