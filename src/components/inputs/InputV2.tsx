@@ -10,9 +10,18 @@ interface TInputProps {
   type: HTMLInputTypeAttribute;
   disabled?: boolean;
   labelClassName?: string;
+  defaultValue?: string;
 }
 
-const InputV2 = ({ label, type, name, register, errorMessage, disabled }: TInputProps) => {
+const InputV2 = ({
+  label,
+  type,
+  name,
+  register,
+  errorMessage,
+  disabled,
+  defaultValue,
+}: TInputProps) => {
   return (
     <div className="relative">
       <input
@@ -26,6 +35,7 @@ const InputV2 = ({ label, type, name, register, errorMessage, disabled }: TInput
         }`}
         placeholder={label}
         disabled={disabled}
+        defaultValue={defaultValue}
         autoComplete="off"
         ref={register}
         {...register(name)}
@@ -41,9 +51,7 @@ const InputV2 = ({ label, type, name, register, errorMessage, disabled }: TInput
         className="text-rose absolute left-0 top-11 font-medium"
       >
         {errorMessage ? (
-          <span className="text-sm text-rose-500">
-            ({errorMessage})
-          </span>
+          <span className="text-sm text-rose-500">({errorMessage})</span>
         ) : null}
       </label>
     </div>
