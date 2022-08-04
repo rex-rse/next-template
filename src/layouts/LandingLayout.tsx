@@ -2,10 +2,16 @@ import LogoDark from '@components/icons/LogoDark';
 import { Disclosure } from '@headlessui/react';
 import { MenuIcon, XIcon, LogoutIcon } from '@heroicons/react/outline';
 import { UserCircleIcon } from '@heroicons/react/solid';
+import { logout } from '@store/counter/loginReducer';
+import { open } from '@store/counter/snackbarReducer';
+import { useAppDispatch } from '@store/hooks';
+import { AxiosError } from 'axios';
 // import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
+import { useMutation, useQuery } from 'react-query';
+import { requester } from 'utils/requester';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -17,11 +23,36 @@ interface TLandingLayout {
 
 const LandingLayout = ({ children }: TLandingLayout) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { mutate, isLoading } = useMutation(
+    () => {
+      return requester({
+        method: 'POST',
+        data: '',
+        url: '/logout/',
+      });
+    },
+    {
+      onSuccess: (response) => {
+        console.log(response);
+        dispatch(logout());
+        router.push('/login');
+      },
+      onError: (error: AxiosError) => {
+        console.log(error.response);
+        dispatch(open({ text: error.response.statusText, type: 'error' }));
+      },
+    }
+  );
+
+  const handleLogout = () => {
+    mutate();
+  };
   const navigation = [
     { name: 'Inicio', href: '/' },
     { name: 'Recargas', href: '/recharges' },
     { name: 'Vehículos', href: '/vehicles' },
-    { name: 'Viajes', href: '/trips' },
+    { name: 'Tránsitos', href: '/trips' },
     // { name: 'Calendar', href: '#' },
   ];
 
@@ -80,7 +111,7 @@ const LandingLayout = ({ children }: TLandingLayout) => {
                   </Link>
 
                   <Link href="/login">
-                    <button className="p-2">
+                    <button className="p-2" onClick={handleLogout}>
                       <LogoutIcon className="h-7 text-slate-100 transition-colors delay-100 duration-200 hover:text-white" />
                     </button>
                   </Link>

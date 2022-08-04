@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import React from 'react';
 import FooterLayout from '@layouts/FooterLayout';
 import LogoDark from '@components/icons/LogoDark';
 import InputV2 from '@components/inputs/InputV2';
@@ -12,15 +12,21 @@ import { open } from '@store/counter/snackbarReducer';
 import { AxiosError } from 'axios';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Input from '@components/inputs/Input';
 
 interface Inputs {
   email: string;
   password: string;
 }
+const initialValues = {
+  name: 'enri14@mail.com',
+  password: 'V14756859',
+};
 
 const Schema = yup.object().shape({
-  email: yup.string().email('Debe ser un correo válido').required('Este campo es requerido'),
+  email: yup
+    .string()
+    .email('Debe ser un correo válido')
+    .required('Este campo es requerido'),
   password: yup
     .string()
     .min(8, 'Mínimo 8 caracteres')
@@ -31,6 +37,7 @@ const Schema = yup.object().shape({
 const Register = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const [items] = React.useState(initialValues);
   const { mutate, isLoading } = useMutation(
     (formData: Inputs) => {
       return requester({
@@ -42,12 +49,11 @@ const Register = () => {
     {
       onSuccess: (response) => {
         const { data } = response;
-        console.log('response data', data);
+
         dispatch(login(data));
         router.push('/');
       },
       onError: (error: AxiosError) => {
-        console.log(error.response.data);
         dispatch(open({ text: error.response.statusText, type: 'error' }));
       },
     }
@@ -76,11 +82,7 @@ const Register = () => {
             <h1 className="my-4 w-full text-3xl font-bold text-emerald-900">
               Bienvenido al sistema
             </h1>
-            <form
-              className="mt-12"
-              onSubmit={handleSubmit(onSubmit)}
-              
-            >
+            <form className="mt-12" onSubmit={handleSubmit(onSubmit)}>
               <div className="mt-16">
                 <InputV2
                   label="Correo electrónico"
@@ -88,6 +90,7 @@ const Register = () => {
                   type="text"
                   errorMessage={errors.email?.message}
                   register={register}
+                  defaultValue={items.name}
                 />
               </div>
               <div className="mt-16">
@@ -97,6 +100,7 @@ const Register = () => {
                   type="password"
                   errorMessage={errors.password?.message}
                   register={register}
+                  defaultValue={items.password}
                 />
               </div>
               <input
@@ -105,14 +109,14 @@ const Register = () => {
                 className="mt-20 block w-full cursor-pointer rounded bg-emerald-600/70 px-4 py-2 text-center font-semibold text-white shadow-md hover:bg-emerald-600/50 focus:outline-none focus:ring focus:ring-emerald-600/50 focus:ring-opacity-80 focus:ring-offset-2"
               />
             </form>
-            <Link href="register">
+            {/* <Link href="register">
               <p className="mt-4 cursor-pointer text-center text-sm">
                 No tienes una cuenta?{' '}
                 <span className="underline decoration-emerald-600 decoration-2 hover:text-emerald-600">
                   Regístrate
                 </span>
               </p>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </FooterLayout>
