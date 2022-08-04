@@ -1,13 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import LandingLayout from '@layouts/LandingLayout';
 import Table from '@components/Table';
-import {
-  TruckIcon,
-  CashIcon,
-  SupportIcon,
-  ExclamationCircleIcon,
-  ArchiveIcon,
-} from '@heroicons/react/outline';
+import { CashIcon, CalendarIcon, TicketIcon } from '@heroicons/react/outline';
 
 const Recharges = () => {
   const headers = [
@@ -202,58 +196,55 @@ const Recharges = () => {
 
   return (
     <>
-      <div className="mt-8  w-full ">
+      <div className="mt-8 w-full">
         <div className="mb-10 space-y-8">
-          <div className="flex justify-end">
+          <div className="flex justify-between">
+            <h2 className="text-3xl tracking-wide text-gray-800">
+              Historial de Recargas
+            </h2>
             <button className="cursor-pointer rounded-lg bg-emerald-600/70 px-4 py-2 text-center font-medium text-white shadow-md hover:bg-emerald-600/50 focus:outline-none focus:ring focus:ring-emerald-600/50 focus:ring-opacity-80 focus:ring-offset-2">
               Recargar
             </button>
           </div>
-
           <div className="grid grid-cols-3 gap-4">
             <div className="h-36 rounded-xl shadow-md">
-              <div className="flex h-4/6 items-center space-x-6 rounded-t-xl bg-white px-6">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/30">
-                  <CashIcon className="h-7 w-7 text-emerald-600" />
+              <div className="flex h-full items-center space-x-6 rounded-xl bg-white px-6">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/30">
+                  <CashIcon className="h-9 w-9 text-emerald-600" />
                 </div>
                 <div>
-                  <h2 className="text-md text-gray-600">Saldo actual</h2>
-                  <h2 className="text-xl font-medium">Bs 1500.00</h2>
+                  <h2 className="text-lg text-gray-600">Saldo actual</h2>
+                  <h2 className="text-2xl font-medium">Bs 1500.00</h2>
                 </div>
               </div>
             </div>
             <div className="h-36 rounded-xl shadow-md">
-              <div className="flex h-4/6 items-center space-x-6 rounded-t-xl bg-white px-6">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/30">
-                  <ArchiveIcon className="h-7 w-7 text-amber-600" />
+              <div className="flex h-full items-center space-x-6 rounded-xl bg-white px-6">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/30">
+                  <CalendarIcon className="h-9 w-9 text-amber-600" />
                 </div>
                 <div>
-                  <h2 className="text-md text-gray-600">Última recarga</h2>
-                  <h2 className="text-xl font-medium">10/07/2022</h2>
+                  <h2 className="text-lg text-gray-600">Última recarga</h2>
+                  <h2 className="text-2xl font-medium">10/07/2022</h2>
                 </div>
               </div>
             </div>
             <div className="h-36 rounded-xl shadow-md">
-              <div className="flex h-4/6 items-center space-x-6 rounded-t-xl bg-white px-6">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/30">
-                  <ExclamationCircleIcon className="h-7 w-7 text-indigo-600" />
+              <div className="flex h-full items-center space-x-6 rounded-xl bg-white px-6">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500/30">
+                  <TicketIcon className="h-9 w-9 rotate-90 text-indigo-600" />
                 </div>
                 <div>
-                  <h2 className="text-md text-gray-600">
+                  <h2 className="text-lg text-gray-600">
                     Monto de última recarga
                   </h2>
-                  <h2 className="text-xl font-medium">Bs 10</h2>
+                  <h2 className="text-2xl font-medium">Bs 10</h2>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="space-y-8">
-          <h2 className="text-2xl tracking-wide text-gray-800">
-            Historial de Recargas
-          </h2>
-          <Table headers={headers} data={data} />
-        </div>
+        <Table headers={headers} data={data} />
       </div>
     </>
   );
