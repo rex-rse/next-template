@@ -67,7 +67,7 @@ const Index = () => {
     {
       id: '6',
       key: 'actions',
-      header: '',
+      header: 'Habilitar',
     },
   ];
 
