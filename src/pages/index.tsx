@@ -74,25 +74,26 @@ const Index = () => {
   useEffect(() => {
     if (data) {
       const rows = data.map(
-        ({ make, model, license_plate, category, tag_id }) => {
+        ({ make, model, license_plate, category, tag_id, enabled }) => {
           return {
             make,
             model,
             license_plate,
             category_title: category.title,
             tag_serial: tag_id.tag_serial,
+            enabled: true,
             actions: (
               <div className="flex items-center space-x-3">
                 <Switch
                   checked={enabled}
                   onChange={setEnabled}
                   className={`${
-                    enabled ? 'bg-emerald-700/50' : 'bg-gray-200'
+                    enabled ? 'bg-blue-600' : 'bg-gray-200'
                   } relative inline-flex h-6 w-11 items-center rounded-full`}
                 >
-                  <span className="sr-only">Deshabilitar vehículo</span>
+                  <span className="sr-only">Enable notifications</span>
                   <span
-                    className={`transform transition duration-200 ease-in-out ${
+                    className={`${
                       enabled ? 'translate-x-6' : 'translate-x-1'
                     } inline-block h-4 w-4 transform rounded-full bg-white`}
                   />

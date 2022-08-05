@@ -6,7 +6,7 @@ import {
   XIcon,
   TruckIcon,
   CalendarIcon,
-  TicketIcon,
+  TagIcon,
 } from '@heroicons/react/outline';
 import { useQuery } from 'react-query';
 import { requester } from 'utils/requester';
@@ -107,31 +107,33 @@ const Vehicles = () => {
                 </div>
                 <div>
                   <h2 className="text-lg text-gray-600">Vehículos</h2>
-                  <h2 className="text-2xl font-medium">1</h2>
+                  <h2 className="text-2xl font-medium">3</h2>
                 </div>
               </div>
             </div>
             <div className="h-36 rounded-xl shadow-md">
               <div className="flex h-full items-center space-x-6 rounded-xl bg-white px-6">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/30">
-                  <CalendarIcon className="h-9 w-9 text-amber-600" />
+                  <img
+                    className="h-9 w-9"
+                    src="/nfc.svg"
+                    alt="tag"
+                  />
                 </div>
                 <div>
-                  <h2 className="text-lg text-gray-600">Última uso</h2>
-                  <h2 className="text-2xl font-medium">10/07/2022</h2>
+                  <h2 className="text-lg text-gray-600">Tag activos</h2>
+                  <h2 className="text-2xl font-medium">3</h2>
                 </div>
               </div>
             </div>
             <div className="h-36 rounded-xl shadow-md">
               <div className="flex h-full items-center space-x-6 rounded-xl bg-white px-6">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500/30">
-                  <TicketIcon className="h-9 w-9 rotate-90 text-indigo-600" />
+                  <CalendarIcon className="h-9 w-9 text-indigo-600" />
                 </div>
                 <div>
-                  <h2 className="text-lg text-gray-600">
-                    ?
-                  </h2>
-                  <h2 className="text-2xl font-medium">?</h2>
+                  <h2 className="text-lg text-gray-600">Último uso</h2>
+                  <h2 className="text-2xl font-medium">10/07/2022</h2>
                 </div>
               </div>
             </div>
