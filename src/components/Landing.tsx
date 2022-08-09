@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Example() {
@@ -49,7 +50,7 @@ export default function Example() {
         </div>
       </div>
       <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-        <img
+        <Image
           className="h-5  w-full object-cover sm:h-72 md:h-96 lg:h-full lg:w-full"
           src="/landing.svg"
           alt=""

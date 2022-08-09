@@ -18,7 +18,10 @@ interface Inputs {
 }
 const Schema = yup.object().shape({
   name: yup.string().required('Este campo es requerido'),
-  email: yup.string().email('Debe ser un correo válido').required('Este campo es requerido'),
+  email: yup
+    .string()
+    .email('Debe ser un correo válido')
+    .required('Este campo es requerido'),
   password: yup
     .string()
     .min(8, 'Mínimo 8 caracteres')
@@ -29,7 +32,7 @@ const Schema = yup.object().shape({
 const Register = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { mutate, isLoading } = useMutation(
+  const { mutate } = useMutation(
     (formData: Inputs) => {
       return requester({
         method: 'POST',

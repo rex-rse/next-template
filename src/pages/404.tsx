@@ -1,11 +1,9 @@
+import Image from 'next/image';
+
 const NotFound = () => {
   return (
     <div className="flex justify-center ">
-      <img
-        className="max-w-4xl max-h-screen"
-        src="/404.svg"
-        alt="noEncontrado"
-      />
+      <Image className="h-screen max-w-4xl" src="/404.svg" alt="noEncontrado" />
     </div>
   );
 };

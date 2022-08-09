@@ -2,10 +2,13 @@ import React, { ReactElement, useState, useEffect } from 'react';
 import LandingLayout from '@layouts/LandingLayout';
 import Table from '@components/Table';
 import { EyeIcon } from '@heroicons/react/solid';
-import { SupportIcon, CalendarIcon, TicketIcon } from '@heroicons/react/outline';
+import {
+  SupportIcon,
+  CalendarIcon,
+  TicketIcon,
+} from '@heroicons/react/outline';
 
 const Trips = () => {
-  const [loading, setLoading] = useState<boolean>(false);
   const [rows, setRows] = useState([]);
 
   const headers = [
@@ -158,7 +161,7 @@ const Trips = () => {
           amount,
           actions: (
             <div className="ml-8">
-              <EyeIcon className="h-6 text-emerald-700/50 hover:text-emerald-500/50 transition-all delay-50 duration-150" />
+              <EyeIcon className="delay-50 h-6 text-emerald-700/50 transition-all duration-150 hover:text-emerald-500/50" />
             </div>
           ),
         };

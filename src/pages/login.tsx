@@ -12,6 +12,7 @@ import { open } from '@store/counter/snackbarReducer';
 import { AxiosError } from 'axios';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import Image from 'next/image';
 
 interface Inputs {
   email: string;
@@ -38,7 +39,7 @@ const Register = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [items] = React.useState(initialValues);
-  const { mutate, isLoading } = useMutation(
+  const { mutate } = useMutation(
     (formData: Inputs) => {
       return requester({
         method: 'POST',
@@ -121,7 +122,7 @@ const Register = () => {
         </div>
       </FooterLayout>
       <div className=" hidden w-full lg:block">
-        <img className="aspect-1 max-h-screen" src="/login.svg" alt="login" />
+        <Image className="aspect-1 max-h-screen" src="/login.svg" alt="login" />
       </div>
     </div>
   );

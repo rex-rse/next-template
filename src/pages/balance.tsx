@@ -3,8 +3,6 @@ import LandingLayout from '@layouts/LandingLayout';
 import Table from '@components/Table';
 
 const Vehicles = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-
   const headers = [
     {
       id: '1',

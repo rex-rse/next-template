@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 import LandingLayout from '@layouts/LandingLayout';
 import Table from '@components/Table';
 import { CashIcon, CalendarIcon, TicketIcon } from '@heroicons/react/outline';

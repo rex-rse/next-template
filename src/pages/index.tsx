@@ -22,7 +22,6 @@ const useFetchData = () =>
   });
 
 const Index = () => {
-  const [loading, setLoading] = useState<boolean>(false);
   const [enabled, setEnabled] = useState(false);
   const [rows, setRows] = useState([]);
   const name = useSelector(
@@ -37,6 +36,7 @@ const Index = () => {
   const { data, isLoading } = useFetchData();
 
   console.log(data);
+  console.log(enabled);
 
   const headers = [
     {

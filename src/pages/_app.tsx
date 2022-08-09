@@ -6,7 +6,6 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import Head from 'next/head';
 
 import '@styles/globals.css';
-import { ThemeProvider } from 'next-themes';
 import { store } from '@store/index';
 import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';

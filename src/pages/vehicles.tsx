@@ -2,14 +2,10 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import LandingLayout from '@layouts/LandingLayout';
 import Table from '@components/Table';
 import { Switch } from '@headlessui/react';
-import {
-  XIcon,
-  TruckIcon,
-  CalendarIcon,
-  TagIcon,
-} from '@heroicons/react/outline';
+import { XIcon, TruckIcon, CalendarIcon } from '@heroicons/react/outline';
 import { useQuery } from 'react-query';
 import { requester } from 'utils/requester';
+import Image from 'next/image';
 
 const useFetchData = () =>
   useQuery('vehicles', async () => {
@@ -18,7 +14,6 @@ const useFetchData = () =>
   });
 
 const Vehicles = () => {
-  const [loading, setLoading] = useState<boolean>(false);
   const [enabled, setEnabled] = useState(false);
   const [rows, setRows] = useState([]);
   const { data, isLoading } = useFetchData();
@@ -114,11 +109,7 @@ const Vehicles = () => {
             <div className="h-36 rounded-xl shadow-md">
               <div className="flex h-full items-center space-x-6 rounded-xl bg-white px-6">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/30">
-                  <img
-                    className="h-9 w-9"
-                    src="/nfc.svg"
-                    alt="tag"
-                  />
+                  <Image className="h-9 w-9" src="/nfc.svg" alt="tag" />
                 </div>
                 <div>
                   <h2 className="text-lg text-gray-600">Tag activos</h2>
@@ -139,7 +130,7 @@ const Vehicles = () => {
             </div>
           </div>
         </div>
-        <Table headers={headers} data={rows} />
+        {isLoading ? 'cargando' : <Table headers={headers} data={rows} />}
       </div>
     </>
   );
