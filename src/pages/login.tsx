@@ -38,7 +38,7 @@ const Register = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [items] = React.useState(initialValues);
-  const { mutate, isLoading } = useMutation(
+  const { mutate } = useMutation(
     (formData: Inputs) => {
       return requester({
         method: 'POST',

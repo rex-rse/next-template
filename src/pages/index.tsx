@@ -22,8 +22,9 @@ const useFetchData = () =>
   });
 
 const Index = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  // const [loading, setLoading] = useState<boolean>(false);
   const [enabled, setEnabled] = useState(false);
+  console.log(enabled);
   const [rows, setRows] = useState([]);
   const name = useSelector(
     (state: any) => state.loginUser?.user_info?.first_name
@@ -131,10 +132,10 @@ const Index = () => {
               </div>
             </div>
             <Link href="/recharges">
-              <a className="flex h-2/6 items-center rounded-b-xl bg-gray-100 px-6 text-emerald-600 decoration-emerald-600 decoration-2 hover:underline">
+              <div className="flex h-2/6 items-center rounded-b-xl bg-gray-100 px-6 text-emerald-600 decoration-emerald-600 decoration-2 hover:underline">
                 <h4 className="text-sm font-normal">Más información</h4>
                 <ChevronRightIcon className="h-4 w-4" />
-              </a>
+              </div>
             </Link>
           </div>
           <div className="h-36 rounded-xl shadow-md">
@@ -148,10 +149,10 @@ const Index = () => {
               </div>
             </div>
             <Link href="/vehicles">
-              <a className="flex h-2/6 items-center rounded-b-xl bg-gray-100 px-6 text-emerald-600 decoration-emerald-600 decoration-2 hover:underline">
+              <div className="flex h-2/6 items-center rounded-b-xl bg-gray-100 px-6 text-emerald-600 decoration-emerald-600 decoration-2 hover:underline">
                 <h4 className="text-sm font-normal">Más información</h4>
                 <ChevronRightIcon className="h-4 w-4" />
-              </a>
+              </div>
             </Link>
           </div>
           <div className="h-36 rounded-xl shadow-md">
@@ -165,10 +166,10 @@ const Index = () => {
               </div>
             </div>
             <Link href="/trips">
-              <a className="flex h-2/6 items-center rounded-b-xl bg-gray-100 px-6 text-emerald-600 decoration-emerald-600 decoration-2 hover:underline">
+              <div className="flex h-2/6 items-center rounded-b-xl bg-gray-100 px-6 text-emerald-600 decoration-emerald-600 decoration-2 hover:underline">
                 <h4 className="text-sm font-normal">Más información</h4>
                 <ChevronRightIcon className="h-4 w-4" />
-              </a>
+              </div>
             </Link>
           </div>
         </div>

@@ -1,9 +1,9 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 import LandingLayout from '@layouts/LandingLayout';
 import Table from '@components/Table';
 
 const Vehicles = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  // const [loading, setLoading] = useState<boolean>(false);
 
   const headers = [
     {

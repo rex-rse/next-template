@@ -50,7 +50,7 @@ const User = () => {
   );
 
   const dispatch = useAppDispatch();
-  const { mutate, isLoading } = useMutation(
+  const { mutate } = useMutation(
     (formData: Inputs) => {
       return requester({
         method: 'POST',

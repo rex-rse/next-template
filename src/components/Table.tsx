@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { EyeIcon, EyeOffIcon, XIcon, FilterIcon } from '@heroicons/react/solid';
-import { SearchIcon } from '@heroicons/react/outline';
+import { EyeOffIcon, XIcon } from '@heroicons/react/solid';
+import Link from 'next/link';
+import React from 'react';
 
 interface TableProps {
   headers: any;
   data: any;
-  children?: JSX.Element | JSX.Element[];
+  children?: React.ReactNode;
 }
 
 const Table = ({ headers, data }: TableProps) => {
@@ -77,18 +77,18 @@ const Table = ({ headers, data }: TableProps) => {
               <div>QR</div>
             </div>
             <div className="flex space-x-2">
-              <a
+              <Link
                 href="#"
                 className="font-medium text-blue-400 hover:text-blue-500 "
               >
                 <EyeOffIcon className="h-5 w-5" />
-              </a>
-              <a
+              </Link>
+              <Link
                 href="#"
                 className="font-medium text-red-400 hover:text-red-500"
               >
                 <XIcon className="h-5 w-5" />
-              </a>
+              </Link>
             </div>
           </div>
           <div className="flex items-center space-x-2">
@@ -105,18 +105,18 @@ const Table = ({ headers, data }: TableProps) => {
               <div>QR</div>
             </div>
             <div className="flex space-x-2">
-              <a
+              <Link
                 href="#"
                 className="font-medium text-blue-400 hover:text-blue-500 "
               >
                 <EyeOffIcon className="h-5 w-5" />
-              </a>
-              <a
+              </Link>
+              <Link
                 href="#"
                 className="font-medium text-red-400 hover:text-red-500"
               >
                 <XIcon className="h-5 w-5" />
-              </a>
+              </Link>
             </div>
           </div>
           <div className="flex items-center space-x-2">
@@ -133,18 +133,18 @@ const Table = ({ headers, data }: TableProps) => {
               <div>QR</div>
             </div>
             <div className="flex space-x-2">
-              <a
+              <Link
                 href="#"
                 className="font-medium text-blue-400 hover:text-blue-500 "
               >
                 <EyeOffIcon className="h-5 w-5" />
-              </a>
-              <a
+              </Link>
+              <Link
                 href="#"
                 className="font-medium text-red-400 hover:text-red-500"
               >
                 <XIcon className="h-5 w-5" />
-              </a>
+              </Link>
             </div>
           </div>
           <div className="flex items-center space-x-2">
