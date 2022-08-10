@@ -15,7 +15,7 @@ interface Inputs {
   password: string;
 }
 
-const create = () => {
+const Create = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { mutate, isLoading, isError } = useMutation(
@@ -80,4 +80,4 @@ const create = () => {
   );
 };
 
-export default create;
+export default Create;

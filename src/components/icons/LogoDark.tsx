@@ -7,7 +7,7 @@ export default function LogoDark({ className = '' }: TIconProps) {
       data-name="Capa 1"
       xmlns="http://www.w3.org/2000/svg"
       // viewBox="0 0 743.24 448.65"
-      className="h-1 w-1"
+      className={`h-1 w-1 ${className}`}
     >
       <path d="M381.19,381.56l-.44-.06.65.1Z" fill="none" />
       <path

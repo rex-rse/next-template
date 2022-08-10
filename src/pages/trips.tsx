@@ -9,6 +9,7 @@ import {
 } from '@heroicons/react/outline';
 
 const Trips = () => {
+  // const [loading, setLoading] = useState<boolean>(false);
   const [rows, setRows] = useState([]);
 
   const headers = [
