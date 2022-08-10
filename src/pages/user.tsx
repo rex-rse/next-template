@@ -38,12 +38,12 @@ const Schema = yup.object().shape({
 const User = () => {
   const [isEditable, setIsEditable] = useState(false);
   const name = useSelector(
-    (state: any) => state.loginUser.user_info.first_name
+    (state: any) => state.loginUser?.user_info?.first_name
   );
   const lastName = useSelector(
-    (state: any) => state.loginUser.user_info.last_name
+    (state: any) => state.loginUser?.user_info?.last_name
   );
-  const email = useSelector((state: any) => state.loginUser.user_info.email);
+  const email = useSelector((state: any) => state.loginUser?.user_info?.email);
 
   const phoneNumber = useSelector(
     (state: any) => state.loginUser.user_info.phone_number

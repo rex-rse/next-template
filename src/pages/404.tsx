@@ -2,7 +2,7 @@ const NotFound = () => {
   return (
     <div className="flex justify-center ">
       <img
-        className="max-w-4xl max-h-screen"
+        className="max-h-screen max-w-4xl"
         src="/404.svg"
         alt="noEncontrado"
       />
