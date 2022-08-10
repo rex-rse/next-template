@@ -46,7 +46,7 @@ const User = () => {
   const email = useSelector((state: any) => state.loginUser?.user_info?.email);
 
   const phoneNumber = useSelector(
-    (state: any) => state.loginUser.user_info.phone_number
+    (state: any) => state.loginUser?.user_info?.phone_number
   );
 
   const dispatch = useAppDispatch();
