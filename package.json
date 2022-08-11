@@ -1,8 +1,8 @@
 {
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "next build && next export",
+    "start": "next start -p 3010",
     "lint": "next lint",
     "lint:fix": "eslint ./src --fix"
   },

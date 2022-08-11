@@ -13,6 +13,7 @@ import {
 import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
 import { requester } from 'utils/requester';
+import RechargueForm from '@components/modalForms/RechargueForm';
 
 const useFetchData = () =>
   useQuery('vehicles', async () => {
@@ -23,6 +24,8 @@ const useFetchData = () =>
 
 const Index = () => {
   // const [loading, setLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
+  const [modal, setModal] = useState('');
   const [enabled, setEnabled] = useState(false);
   console.log(enabled);
   const [rows, setRows] = useState([]);
@@ -38,6 +41,11 @@ const Index = () => {
   const { data, isLoading } = useFetchData();
 
   console.log(data);
+
+  const handleRecharge = () => {
+    setOpen(true);
+    setModal('recharge');
+  };
 
   const headers = [
     {
@@ -110,77 +118,85 @@ const Index = () => {
   }, [data]);
 
   return (
-    <div className="mt-8 w-full">
-      <div className="mb-10 space-y-8">
-        <div className="flex items-center justify-between">
-          <h2 className="text-4xl capitalize tracking-wide text-gray-800">
-            Bienvenido, {name} {''} {lastName}
+    <>
+      {modal === 'recharge' ? (
+        <RechargueForm open={open} setOpen={setOpen} />
+      ) : null}
+      <div className="mt-8 w-full">
+        <div className="mb-10 space-y-8">
+          <div className="flex items-center justify-between">
+            <h2 className="text-4xl capitalize tracking-wide text-gray-800">
+              Bienvenido, {name} {''} {lastName}
+            </h2>
+            <button
+              onClick={handleRecharge}
+              className="cursor-pointer rounded-lg bg-emerald-600/70 px-4 py-2 text-center font-medium text-white shadow-md hover:bg-emerald-600/50 focus:outline-none focus:ring focus:ring-emerald-600/50 focus:ring-opacity-80 focus:ring-offset-2"
+            >
+              Recargar
+            </button>
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="h-36 rounded-xl shadow-md">
+              <div className="flex h-4/6 items-center space-x-6 rounded-t-xl bg-white px-6">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/30">
+                  <CashIcon className="h-7 w-7 text-emerald-600" />
+                </div>
+                <div>
+                  <h2 className="text-md text-gray-600">Saldo actual</h2>
+                  <h2 className="text-xl font-medium">Bs 1500.00</h2>
+                </div>
+              </div>
+              <Link href="/recharges">
+                <div className="flex h-2/6 items-center rounded-b-xl bg-gray-100 px-6 text-emerald-600 decoration-emerald-600 decoration-2 hover:underline">
+                  <h4 className="text-sm font-normal">Más información</h4>
+                  <ChevronRightIcon className="h-4 w-4" />
+                </div>
+              </Link>
+            </div>
+            <div className="h-36 rounded-xl shadow-md">
+              <div className="flex h-4/6 items-center space-x-6 rounded-t-xl bg-white px-6">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/30">
+                  <TruckIcon className="h-7 w-7 text-amber-600" />
+                </div>
+                <div>
+                  <h2 className="text-md text-gray-600">Vehículos</h2>
+                  <h2 className="text-xl font-medium">{vehicle}</h2>
+                </div>
+              </div>
+              <Link href="/vehicles">
+                <div className="flex h-2/6 items-center rounded-b-xl bg-gray-100 px-6 text-emerald-600 decoration-emerald-600 decoration-2 hover:underline">
+                  <h4 className="text-sm font-normal">Más información</h4>
+                  <ChevronRightIcon className="h-4 w-4" />
+                </div>
+              </Link>
+            </div>
+            <div className="h-36 rounded-xl shadow-md">
+              <div className="flex h-4/6 items-center space-x-6 rounded-t-xl bg-white px-6">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/30">
+                  <SupportIcon className="h-7 w-7 text-indigo-600" />
+                </div>
+                <div>
+                  <h2 className="text-md text-gray-600">Tránsitos</h2>
+                  <h2 className="text-xl font-medium">12750</h2>
+                </div>
+              </div>
+              <Link href="/trips">
+                <div className="flex h-2/6 items-center rounded-b-xl bg-gray-100 px-6 text-emerald-600 decoration-emerald-600 decoration-2 hover:underline">
+                  <h4 className="text-sm font-normal">Más información</h4>
+                  <ChevronRightIcon className="h-4 w-4" />
+                </div>
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className="space-y-8">
+          <h2 className="text-2xl tracking-wide text-gray-800">
+            Vehículos Asociados
           </h2>
-          <button className="cursor-pointer rounded-lg bg-emerald-600/70 px-4 py-2 text-center font-medium text-white shadow-md hover:bg-emerald-600/50 focus:outline-none focus:ring focus:ring-emerald-600/50 focus:ring-opacity-80 focus:ring-offset-2">
-            Recargar
-          </button>
-        </div>
-        <div className="grid grid-cols-3 gap-4">
-          <div className="h-36 rounded-xl shadow-md">
-            <div className="flex h-4/6 items-center space-x-6 rounded-t-xl bg-white px-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/30">
-                <CashIcon className="h-7 w-7 text-emerald-600" />
-              </div>
-              <div>
-                <h2 className="text-md text-gray-600">Saldo actual</h2>
-                <h2 className="text-xl font-medium">Bs 1500.00</h2>
-              </div>
-            </div>
-            <Link href="/recharges">
-              <div className="flex h-2/6 items-center rounded-b-xl bg-gray-100 px-6 text-emerald-600 decoration-emerald-600 decoration-2 hover:underline">
-                <h4 className="text-sm font-normal">Más información</h4>
-                <ChevronRightIcon className="h-4 w-4" />
-              </div>
-            </Link>
-          </div>
-          <div className="h-36 rounded-xl shadow-md">
-            <div className="flex h-4/6 items-center space-x-6 rounded-t-xl bg-white px-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/30">
-                <TruckIcon className="h-7 w-7 text-amber-600" />
-              </div>
-              <div>
-                <h2 className="text-md text-gray-600">Vehículos</h2>
-                <h2 className="text-xl font-medium">{vehicle}</h2>
-              </div>
-            </div>
-            <Link href="/vehicles">
-              <div className="flex h-2/6 items-center rounded-b-xl bg-gray-100 px-6 text-emerald-600 decoration-emerald-600 decoration-2 hover:underline">
-                <h4 className="text-sm font-normal">Más información</h4>
-                <ChevronRightIcon className="h-4 w-4" />
-              </div>
-            </Link>
-          </div>
-          <div className="h-36 rounded-xl shadow-md">
-            <div className="flex h-4/6 items-center space-x-6 rounded-t-xl bg-white px-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/30">
-                <SupportIcon className="h-7 w-7 text-indigo-600" />
-              </div>
-              <div>
-                <h2 className="text-md text-gray-600">Tránsitos</h2>
-                <h2 className="text-xl font-medium">12750</h2>
-              </div>
-            </div>
-            <Link href="/trips">
-              <div className="flex h-2/6 items-center rounded-b-xl bg-gray-100 px-6 text-emerald-600 decoration-emerald-600 decoration-2 hover:underline">
-                <h4 className="text-sm font-normal">Más información</h4>
-                <ChevronRightIcon className="h-4 w-4" />
-              </div>
-            </Link>
-          </div>
+          {isLoading ? null : <Table headers={headers} data={rows} />}
         </div>
       </div>
-      <div className="space-y-8">
-        <h2 className="text-2xl tracking-wide text-gray-800">
-          Vehículos Asociados
-        </h2>
-        {isLoading ? null : <Table headers={headers} data={rows} />}
-      </div>
-    </div>
+    </>
   );
 };
 
