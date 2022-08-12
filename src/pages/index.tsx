@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
 import { requester } from 'utils/requester';
 import RechargueForm from '@components/modalForms/RechargueForm';
+import { useGuard } from 'hooks/useGuard';
 
 const useFetchData = () =>
   useQuery('vehicles', async () => {
@@ -23,6 +24,7 @@ const useFetchData = () =>
   });
 
 const Index = () => {
+  useGuard();
   // const [loading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
   const [modal, setModal] = useState('');

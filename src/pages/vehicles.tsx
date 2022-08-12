@@ -5,6 +5,7 @@ import { Switch } from '@headlessui/react';
 import { XIcon, TruckIcon, CalendarIcon } from '@heroicons/react/outline';
 import { useQuery } from 'react-query';
 import { requester } from 'utils/requester';
+import { useGuard } from 'hooks/useGuard';
 
 const useFetchData = () =>
   useQuery('vehicles', async () => {
@@ -13,6 +14,7 @@ const useFetchData = () =>
   });
 
 const Vehicles = () => {
+  useGuard();
   // const [loading, setLoading] = useState<boolean>(false);
   const [enabled, setEnabled] = useState(false);
   const [rows, setRows] = useState([]);

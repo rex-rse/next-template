@@ -7,8 +7,10 @@ import {
   CalendarIcon,
   TicketIcon,
 } from '@heroicons/react/outline';
+import { useGuard } from 'hooks/useGuard';
 
 const Trips = () => {
+  useGuard();
   // const [loading, setLoading] = useState<boolean>(false);
   const [rows, setRows] = useState([]);
 

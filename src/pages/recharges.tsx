@@ -2,8 +2,10 @@ import React, { ReactElement } from 'react';
 import LandingLayout from '@layouts/LandingLayout';
 import Table from '@components/Table';
 import { CashIcon, CalendarIcon, TicketIcon } from '@heroicons/react/outline';
+import { useGuard } from 'hooks/useGuard';
 
 const Recharges = () => {
+  useGuard();
   const headers = [
     {
       id: '1',

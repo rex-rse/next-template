@@ -11,6 +11,7 @@ import { AxiosError } from 'axios';
 import { open } from '@store/counter/snackbarReducer';
 import { UserCircleIcon, PencilAltIcon } from '@heroicons/react/solid';
 import { useSelector } from 'react-redux';
+import { useGuard } from 'hooks/useGuard';
 
 interface Inputs {
   password: string;
@@ -36,6 +37,7 @@ const Schema = yup.object().shape({
 });
 
 const User = () => {
+  useGuard();
   const [isEditable, setIsEditable] = useState(false);
   const name = useSelector(
     (state: any) => state.loginUser?.user_info?.first_name

@@ -76,8 +76,8 @@ const Register = () => {
       <FooterLayout>
         <div className="mx-auto my-auto flex flex-col items-center justify-center rounded-2xl bg-white/75 p-10 shadow-2xl">
           <div>
-            <div className="w-full">
-              <LogoDark className="mx-2 w-24" />
+            <div className=" w-full">
+              <img src="/logo.svg" alt="logo" className="h-15" />
             </div>
             <h1 className="my-4 w-full text-3xl font-bold text-emerald-900">
               Bienvenido al sistema
