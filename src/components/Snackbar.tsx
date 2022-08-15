@@ -12,13 +12,13 @@ const Snackbar = () => {
     dispatch(close());
   };
 
-  // useEffect(() => {
-  //   if (open) {
-  //     setTimeout(() => {
-  //       dispatch(close());
-  //     }, 3000);
-  //   }
-  // }, [open, dispatch]);
+  useEffect(() => {
+    if (open) {
+      setTimeout(() => {
+        dispatch(close());
+      }, 3000);
+    }
+  }, [open, dispatch]);
 
   return open ? (
     <div
