@@ -5,13 +5,13 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation } from 'react-query';
-import { requester } from 'utils/requester';
 import { useAppDispatch } from '@store/hooks';
 import { AxiosError } from 'axios';
 import { open } from '@store/counter/snackbarReducer';
 import { UserCircleIcon, PencilAltIcon } from '@heroicons/react/solid';
 import { useSelector } from 'react-redux';
 import { useGuard } from 'hooks/useGuard';
+import { useAxios } from 'hooks/useAxios';
 
 interface Inputs {
   password: string;
@@ -51,6 +51,7 @@ const User = () => {
     (state: any) => state.loginUser?.user_info?.phone_number
   );
 
+  const { requester } = useAxios();
   const dispatch = useAppDispatch();
   const { mutate } = useMutation(
     (formData: Inputs) => {

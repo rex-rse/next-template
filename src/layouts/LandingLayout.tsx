@@ -6,12 +6,12 @@ import { logout } from '@store/counter/loginReducer';
 import { open } from '@store/counter/snackbarReducer';
 import { useAppDispatch } from '@store/hooks';
 import { AxiosError } from 'axios';
+import { useAxios } from 'hooks/useAxios';
 // import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useMutation, useQuery } from 'react-query';
-import { requester } from 'utils/requester';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -24,6 +24,7 @@ interface TLandingLayout {
 const LandingLayout = ({ children }: TLandingLayout) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const { requester } = useAxios();
   const { mutate, isLoading } = useMutation(
     () => {
       return requester({

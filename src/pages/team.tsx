@@ -1,8 +1,10 @@
 import LandingLayout from '@layouts/LandingLayout';
+import { useAxios } from 'hooks/useAxios';
 import Image from 'next/image';
 import { ReactElement } from 'react';
 import { useQuery } from 'react-query';
-import { requester } from 'utils/requester';
+
+const { requester } = useAxios();
 
 const useFetchData = () =>
   useQuery('team', async () => {

@@ -5,13 +5,13 @@ import InputV2 from '@components/inputs/InputV2';
 import { useRouter } from 'next/router';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation } from 'react-query';
-import { requester } from 'utils/requester';
 import { useAppDispatch } from '@store/hooks';
 import { login } from '@store/counter/loginReducer';
 import { open } from '@store/counter/snackbarReducer';
 import { AxiosError } from 'axios';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useAxios } from 'hooks/useAxios';
 
 interface Inputs {
   email: string;
@@ -36,6 +36,7 @@ const Schema = yup.object().shape({
 
 const Register = () => {
   const router = useRouter();
+  const { requester } = useAxios();
   const dispatch = useAppDispatch();
   const [items] = React.useState(initialValues);
   const { mutate } = useMutation(

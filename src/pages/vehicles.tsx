@@ -4,8 +4,10 @@ import Table from '@components/Table';
 import { Switch } from '@headlessui/react';
 import { XIcon, TruckIcon, CalendarIcon } from '@heroicons/react/outline';
 import { useQuery } from 'react-query';
-import { requester } from 'utils/requester';
 import { useGuard } from 'hooks/useGuard';
+import { useAxios } from 'hooks/useAxios';
+
+const { requester } = useAxios();
 
 const useFetchData = () =>
   useQuery('vehicles', async () => {

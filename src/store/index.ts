@@ -19,6 +19,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import modalReducer from './counter/modalReducer';
 
 const persistConfig = {
   key: 'root',
@@ -30,6 +31,7 @@ const persistedReducer = persistReducer(
     counter: counterReducer,
     snackbar: snackbarReducer,
     loginUser: loginReducer,
+    modal: modalReducer,
   })
 );
 export const store = configureStore({

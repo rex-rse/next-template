@@ -12,10 +12,12 @@ import {
 } from '@heroicons/react/outline';
 import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
-import { requester } from 'utils/requester';
+
 import RechargueForm from '@components/modalForms/RechargueForm';
 import { useGuard } from 'hooks/useGuard';
+import { useAxios } from 'hooks/useAxios';
 
+const { requester } = useAxios();
 const useFetchData = () =>
   useQuery('vehicles', async () => {
     const { data } = await requester.get('/registered-vehicle/get/');

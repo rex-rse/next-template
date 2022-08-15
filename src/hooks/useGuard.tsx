@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { useAppSelector } from '@store/hooks';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { loginUser } from '@store/counter/loginReducer';
+import { open } from '@store/counter/modalReducer';
 
 export const useGuard = () => {
-  const router = useRouter();
+  const dispatch = useAppDispatch();
   const { loggedIn } = useAppSelector(loginUser);
+
   useEffect(() => {
-    !loggedIn ? router.push('/login') : null;
+    !loggedIn ? dispatch(open()) : null;
   }, [loggedIn]);
 };

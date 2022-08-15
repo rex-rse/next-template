@@ -4,11 +4,11 @@ import { login } from '@store/counter/loginReducer';
 import { open } from '@store/counter/snackbarReducer';
 import { useAppDispatch } from '@store/hooks';
 import { AxiosError } from 'axios';
+import { useAxios } from 'hooks/useAxios';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useMutation } from 'react-query';
-import { requester } from 'utils/requester';
 
 interface Inputs {
   email: string;
@@ -18,6 +18,7 @@ interface Inputs {
 const Create = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const { requester } = useAxios();
   const { mutate, isLoading, isError } = useMutation(
     (formData: Inputs) => {
       return requester({

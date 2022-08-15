@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import FooterLayout from '@layouts/FooterLayout';
 import InputV2 from '@components/inputs/InputV2';
-import { requester } from 'utils/requester';
 import { useRouter } from 'next/router';
 import { useAppDispatch } from '@store/hooks';
 import { useMutation } from 'react-query';
@@ -10,6 +9,7 @@ import { AxiosError } from 'axios';
 import { open } from '@store/counter/snackbarReducer';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useAxios } from 'hooks/useAxios';
 
 interface Inputs {
   name: string;
@@ -31,6 +31,7 @@ const Schema = yup.object().shape({
 
 const Register = () => {
   const router = useRouter();
+  const { requester } = useAxios();
   const dispatch = useAppDispatch();
   const { mutate } = useMutation(
     (formData: Inputs) => {

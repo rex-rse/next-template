@@ -12,23 +12,30 @@ const Snackbar = () => {
     dispatch(close());
   };
 
-  useEffect(() => {
-    if (open) {
-      setTimeout(() => {
-        dispatch(close());
-      }, 3000);
-    }
-  }, [open, dispatch]);
+  // useEffect(() => {
+  //   if (open) {
+  //     setTimeout(() => {
+  //       dispatch(close());
+  //     }, 3000);
+  //   }
+  // }, [open, dispatch]);
 
   return open ? (
-    <div className="absolute right-6 top-6 flex h-16 w-96 items-center rounded-md border-4 border-green-600 bg-green-900 p-4">
+    <div
+      className={`absolute right-6 top-6 flex h-16 w-96 items-center rounded-md p-4 ${
+        type == 'success' ? 'bg-emerald-300' : ''
+      } ${type == 'error' ? 'bg-red-500' : ''}`}
+    >
       <div className="w-1/12">
-        <CheckCircleIcon className="block h-6 w-6" aria-hidden="true" />
+        <CheckCircleIcon
+          className="block h-7 w-7 text-white"
+          aria-hidden="true"
+        />
       </div>
-      <h1 className="mx-2 w-10/12 text-white">{text}</h1>
+      <h1 className="mx-2 w-10/12 text-lg text-white">{text}</h1>
       <button className="w-1/12">
         <XIcon
-          className="block h-6 w-6"
+          className="block h-7 w-7 text-white"
           aria-hidden="true"
           onClick={handleClose}
         />

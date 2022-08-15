@@ -9,7 +9,7 @@ export type SnackbarState = {
 };
 
 const initialState: SnackbarState = {
-  open: false,
+  open: true,
   text: '',
   type: 'success',
 };

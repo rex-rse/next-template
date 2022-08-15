@@ -11,6 +11,7 @@ import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';
 import Snackbar from '@components/Snackbar';
 import { PersistGate } from 'redux-persist/integration/react';
+import OutForm from '@components/modalForms/OutForm';
 
 export type NextPageWithLayout = NextPage & {
   // eslint-disable-next-line no-unused-vars
@@ -40,6 +41,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
           </Head>
           {getLayout(<Component {...pageProps} />)}
           <Snackbar />
+          <OutForm />
           <ReactQueryDevtools initialIsOpen={false} />
           {/* </ThemeProvider> */}
         </PersistGate>
