@@ -1,127 +1,87 @@
 import React, { ReactElement } from 'react';
 import LandingLayout from '@layouts/LandingLayout';
 import Table from '@components/Table';
-import { CashIcon, CalendarIcon, TicketIcon } from '@heroicons/react/outline';
+import {
+  CashIcon,
+  CalendarIcon,
+  TicketIcon,
+  XCircleIcon,
+} from '@heroicons/react/outline';
 import { useGuard } from 'hooks/useGuard';
+import { useSelector } from 'react-redux';
+import { useAxios } from 'hooks/useAxios';
+import { useMutation } from 'react-query';
+import { useAppDispatch } from '@store/hooks';
+import { AxiosError } from 'axios';
+import { open } from '@store/counter/snackbarReducer';
+import { CheckCircleIcon } from '@heroicons/react/solid';
 
 const Recharges = () => {
   useGuard();
+  const dispatch = useAppDispatch();
+  const { requester } = useAxios();
+  const [rows, setRows] = React.useState([]);
+  const accountNumber = useSelector(
+    (state: any) => state.loginUser?.user_info?.account_number
+  );
+  const { mutate } = useMutation(
+    (account: any) => {
+      return requester({
+        method: 'POST',
+        data: account,
+        url: 'recharge-module/get/',
+      });
+    },
+    {
+      onSuccess: (response) => {
+        const { data } = response;
+        console.log(data);
+      },
+      onError: (error: AxiosError) => {
+        dispatch(open({ text: error.response.statusText, type: 'error' }));
+      },
+    }
+  );
+
+  mutate({ account_number: accountNumber });
+
   const headers = [
     {
       id: '1',
-      key: 'date',
-      header: 'Fecha',
+      key: 'external_reference_id',
+      header: 'Referencia',
     },
     {
       id: '2',
-      key: 'time',
-      header: 'Hora',
-    },
-    {
-      id: '3',
-      key: 'method',
-      header: 'Método',
-    },
-    {
-      id: '4',
-      key: 'ammount',
+      key: 'facial_amount',
       header: 'Monto',
     },
     {
-      id: '5',
-      key: 'currency',
-      header: 'Moneda',
-    },
-    {
-      id: '6',
-      key: 'total_bs',
-      header: 'Total en Bolívares',
+      id: '3',
+      key: 'status',
+      header: 'Estado',
     },
   ];
 
-  const data = [
-    {
-      id: '1',
-      date: 'DD/MM/AA',
-      time: 'HH:MM',
-      method: 'Efectivo',
-      ammount: '10',
-      currency: '$',
-      total_bs: 'Bs 58,4',
-    },
-    {
-      id: '2',
-      date: 'DD/MM/AA',
-      time: 'HH:MM',
-      method: 'Efectivo',
-      ammount: '10',
-      currency: '$',
-      total_bs: 'Bs 58,4',
-    },
-    {
-      id: '3',
-      date: 'DD/MM/AA',
-      time: 'HH:MM',
-      method: 'Efectivo',
-      ammount: '10',
-      currency: '$',
-      total_bs: 'Bs 58,4',
-    },
-    {
-      id: '4',
-      date: 'DD/MM/AA',
-      time: 'HH:MM',
-      method: 'Efectivo',
-      ammount: '10',
-      currency: '$',
-      total_bs: 'Bs 58,4',
-    },
-    {
-      id: '5',
-      date: 'DD/MM/AA',
-      time: 'HH:MM',
-      method: 'Efectivo',
-      ammount: '10',
-      currency: '$',
-      total_bs: 'Bs 58,4',
-    },
-    {
-      id: '6',
-      date: 'DD/MM/AA',
-      time: 'HH:MM',
-      method: 'Efectivo',
-      ammount: '10',
-      currency: '$',
-      total_bs: 'Bs 58,4',
-    },
-    {
-      id: '7',
-      date: 'DD/MM/AA',
-      time: 'HH:MM',
-      method: 'Efectivo',
-      ammount: '10',
-      currency: '$',
-      total_bs: 'Bs 58,4',
-    },
-    {
-      id: '8',
-      date: 'DD/MM/AA',
-      time: 'HH:MM',
-      method: 'Efectivo',
-      ammount: '10',
-      currency: '$',
-      total_bs: 'Bs 58,4',
-    },
-    {
-      id: '9',
-      date: 'DD/MM/AA',
-      time: 'HH:MM',
-      method: 'Efectivo',
-      ammount: '10',
-      currency: '$',
-      total_bs: 'Bs 58,4',
-    },
-  ];
+  React.useEffect(() => {
+    if (rows) {
+      const table = rows.map(
+        ({ external_reference_id, facial_amount, status }) => {
+          return {
+            external_reference_id,
+            facial_amount,
+            status:
+              status === 'created' ? (
+                <CheckCircleIcon className="h-6 text-green-500" />
+              ) : status === 'cancelled' ? (
+                <XCircleIcon className="h-6 text-red-500" />
+              ) : null,
+          };
+        }
+      );
+      setRows(table);
+    }
+  }, [rows]);
 
   return (
     <>
@@ -173,7 +133,7 @@ const Recharges = () => {
             </div>
           </div>
         </div>
-        <Table headers={headers} data={data} />
+        <Table headers={headers} data={rows} />
       </div>
     </>
   );
