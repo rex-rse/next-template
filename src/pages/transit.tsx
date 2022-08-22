@@ -9,7 +9,7 @@ import {
 } from '@heroicons/react/outline';
 import { useGuard } from 'hooks/useGuard';
 
-const Trips = () => {
+const Transit = () => {
   useGuard();
   // const [loading, setLoading] = useState<boolean>(false);
   const [rows, setRows] = useState([]);
@@ -165,7 +165,7 @@ const Trips = () => {
           actions: (
             <div className="ml-8">
               <EyeIcon
-                className={`cursor-pointer text-emerald-700/50 transition-all duration-150 hover:text-emerald-500`}
+                className={`h-6 cursor-pointer text-emerald-700/50 transition-all duration-150 hover:text-emerald-500`}
               />
             </div>
           ),
@@ -222,8 +222,8 @@ const Trips = () => {
   );
 };
 
-Trips.getLayout = function getLayout(page: ReactElement) {
+Transit.getLayout = function getLayout(page: ReactElement) {
   return <LandingLayout>{page}</LandingLayout>;
 };
 
-export default Trips;
+export default Transit;

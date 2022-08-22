@@ -18,8 +18,8 @@ interface Inputs {
   password: string;
 }
 const initialValues = {
-  name: 'enri14@mail.com',
-  password: 'V14756859',
+  name: 'dinojefe@mail.com',
+  password: 'V20895698',
 };
 
 const Schema = yup.object().shape({

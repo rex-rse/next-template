@@ -184,7 +184,7 @@ const Index = () => {
                   <h2 className="text-xl font-medium">12750</h2>
                 </div>
               </div>
-              <Link href="/trips">
+              <Link href="/transit">
                 <div className="flex h-2/6 items-center rounded-b-xl bg-gray-100 px-6 text-emerald-600 decoration-emerald-600 decoration-2 hover:underline">
                   <h4 className="text-sm font-normal">Más información</h4>
                   <ChevronRightIcon className="h-4 w-4" />

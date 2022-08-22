@@ -53,7 +53,7 @@ const LandingLayout = ({ children }: TLandingLayout) => {
     { name: 'Inicio', href: '/' },
     { name: 'Recargas', href: '/recharges' },
     { name: 'Vehículos', href: '/vehicles' },
-    { name: 'Tránsitos', href: '/trips' },
+    { name: 'Tránsitos', href: '/transit' },
     // { name: 'Calendar', href: '#' },
   ];
 
