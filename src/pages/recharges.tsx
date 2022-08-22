@@ -43,8 +43,6 @@ const Recharges = () => {
     }
   );
 
-  mutate({ account_number: accountNumber });
-
   const headers = [
     {
       id: '1',
@@ -62,26 +60,25 @@ const Recharges = () => {
       header: 'Estado',
     },
   ];
-
+  console.log(accountNumber);
   React.useEffect(() => {
-    if (rows) {
-      const table = rows.map(
-        ({ external_reference_id, facial_amount, status }) => {
-          return {
-            external_reference_id,
-            facial_amount,
-            status:
-              status === 'created' ? (
-                <CheckCircleIcon className="h-6 text-green-500" />
-              ) : status === 'cancelled' ? (
-                <XCircleIcon className="h-6 text-red-500" />
-              ) : null,
-          };
-        }
-      );
-      setRows(table);
-    }
-  }, [rows]);
+    mutate({ account_number: accountNumber });
+    const table = rows.map(
+      ({ external_reference_id, facial_amount, status }) => {
+        return {
+          external_reference_id,
+          facial_amount,
+          status:
+            status === 'created' ? (
+              <CheckCircleIcon className="h-6 text-green-500" />
+            ) : status === 'cancelled' ? (
+              <XCircleIcon className="h-6 text-red-500" />
+            ) : null,
+        };
+      }
+    );
+    setRows(table);
+  }, []);
 
   return (
     <>

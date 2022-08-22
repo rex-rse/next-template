@@ -173,7 +173,7 @@ const Trips = () => {
       }
     );
     setRows(rows);
-  });
+  }, []);
 
   return (
     <div className="mt-8 w-full">
