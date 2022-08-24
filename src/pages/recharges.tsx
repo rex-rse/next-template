@@ -15,12 +15,21 @@ import { useAppDispatch } from '@store/hooks';
 import { AxiosError } from 'axios';
 import { open } from '@store/counter/snackbarReducer';
 import { CheckCircleIcon } from '@heroicons/react/solid';
+import RechargueForm from '@components/modalForms/RechargueForm';
 
 const Recharges = () => {
   useGuard();
   const dispatch = useAppDispatch();
   const { requester } = useAxios();
   const [rows, setRows] = React.useState([]);
+  const [openModal, setOpenModal] = React.useState(false);
+  const [modal, setModal] = React.useState('');
+
+  const handleRecharge = () => {
+    setOpenModal(true);
+    setModal('recharge');
+  };
+
   const accountNumber = useSelector(
     (state: any) => state.loginUser?.user_info?.account_number
   );
@@ -60,7 +69,7 @@ const Recharges = () => {
       header: 'Estado',
     },
   ];
-  console.log(accountNumber);
+
   React.useEffect(() => {
     mutate({ account_number: accountNumber });
     const table = rows.map(
@@ -82,13 +91,24 @@ const Recharges = () => {
 
   return (
     <>
+      {modal === 'recharge' ? (
+        <RechargueForm
+          open={openModal}
+          setOpen={setOpenModal}
+          accountNumber={accountNumber}
+        />
+      ) : null}
+
       <div className="mt-8 w-full">
         <div className="mb-10 space-y-8">
           <div className="flex justify-between">
             <h2 className="text-3xl tracking-wide text-gray-800">
               Historial de Recargas
             </h2>
-            <button className="cursor-pointer rounded-lg bg-emerald-600/70 px-4 py-2 text-center font-medium text-white shadow-md hover:bg-emerald-600/50 focus:outline-none focus:ring focus:ring-emerald-600/50 focus:ring-opacity-80 focus:ring-offset-2">
+            <button
+              onClick={handleRecharge}
+              className="cursor-pointer rounded-lg bg-emerald-600/70 px-4 py-2 text-center font-medium text-white shadow-md hover:bg-emerald-600/50 focus:outline-none focus:ring focus:ring-emerald-600/50 focus:ring-opacity-80 focus:ring-offset-2"
+            >
               Recargar
             </button>
           </div>

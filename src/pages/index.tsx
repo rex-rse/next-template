@@ -42,6 +42,12 @@ const Index = () => {
   const vehicle = useSelector(
     (state: any) => state.loginUser?.user_info?.vehicles
   );
+  const accountNumber = useSelector(
+    (state: any) => state.loginUser?.user_info?.account_number
+  );
+  const balance = useSelector(
+    (state: any) => state.loginUser?.account_info?.nominal_balance
+  );
   const { data, isLoading } = useFetchData();
 
   console.log(data);
@@ -124,7 +130,11 @@ const Index = () => {
   return (
     <>
       {modal === 'recharge' ? (
-        <RechargueForm open={open} setOpen={setOpen} />
+        <RechargueForm
+          open={open}
+          setOpen={setOpen}
+          accountNumber={accountNumber}
+        />
       ) : null}
       <div className="mt-8 w-full">
         <div className="mb-10 space-y-8">
@@ -147,7 +157,7 @@ const Index = () => {
                 </div>
                 <div>
                   <h2 className="text-md text-gray-600">Saldo actual</h2>
-                  <h2 className="text-xl font-medium">Bs 1500.00</h2>
+                  <h2 className="text-xl font-medium">Bs {balance}</h2>
                 </div>
               </div>
               <Link href="/recharges">
