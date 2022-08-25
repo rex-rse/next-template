@@ -167,7 +167,7 @@ const Index = () => {
             license_plate,
             category_title: category.title,
             tag_serial: tag_id.tag_serial,
-            enabled: false,
+            enabled: true,
             active: active ? (
               <CheckCircleIcon className="h-6 text-green-500" />
             ) : (
