@@ -9,13 +9,18 @@ import {
   SupportIcon,
   ChevronRightIcon,
   XIcon,
+  XCircleIcon,
 } from '@heroicons/react/outline';
 import { useSelector } from 'react-redux';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 
 import RechargueForm from '@components/modalForms/RechargueForm';
 import { useGuard } from 'hooks/useGuard';
 import { useAxios } from 'hooks/useAxios';
+import { AxiosError } from 'axios';
+import { useAppDispatch } from '@store/hooks';
+import { open } from '@store/counter/snackbarReducer';
+import { CheckCircleIcon } from '@heroicons/react/solid';
 
 const { requester } = useAxios();
 const useFetchData = () =>
@@ -27,8 +32,8 @@ const useFetchData = () =>
 
 const Index = () => {
   useGuard();
-  // const [loading, setLoading] = useState<boolean>(false);
-  const [open, setOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const [openModal, setOpenModal] = useState(false);
   const [modal, setModal] = useState('');
   const [enabled, setEnabled] = useState(false);
   console.log(enabled);
@@ -52,9 +57,57 @@ const Index = () => {
 
   console.log(data);
 
+  const { mutate } = useMutation(
+    (id: any) => {
+      return requester({
+        method: 'POST',
+        data: id,
+        url: '/registered-vehicle/cancel/',
+      });
+    },
+    {
+      onSuccess: (response) => {
+        const { data } = response;
+        return data.data;
+      },
+      onError: (error: AxiosError) => {
+        dispatch(open({ text: error.response.statusText, type: 'error' }));
+      },
+    }
+  );
+
+  const { mutate: mutate2 } = useMutation(
+    (id: any) => {
+      return requester({
+        method: 'POST',
+        data: id,
+        url: '/registered-vehicle/block/',
+      });
+    },
+    {
+      onSuccess: (response) => {
+        const { data } = response;
+        return data.data;
+      },
+      onError: (error: AxiosError) => {
+        dispatch(open({ text: error.response.statusText, type: 'error' }));
+      },
+    }
+  );
+
   const handleRecharge = () => {
-    setOpen(true);
+    setOpenModal(true);
     setModal('recharge');
+  };
+
+  const handleCancel = (e) => {
+    const id = e.currentTarget.dataset.tag;
+    mutate({ id: id });
+  };
+
+  const handleDisabled = (e) => {
+    const id = e.currentTarget.dataset.id;
+    mutate2({ id: id });
   };
 
   const headers = [
@@ -85,27 +138,48 @@ const Index = () => {
     },
     {
       id: '6',
+      key: 'status',
+      header: 'Habilitado',
+    },
+    {
+      id: '7',
       key: 'actions',
-      header: 'Habilitar',
+      header: 'Acciones',
     },
   ];
 
   useEffect(() => {
     if (data) {
       const rows = data.map(
-        ({ make, model, license_plate, category, tag_id, enabled }) => {
+        ({
+          id,
+          make,
+          model,
+          license_plate,
+          category,
+          tag_id,
+          enabled,
+          active,
+        }) => {
           return {
             make,
             model,
             license_plate,
             category_title: category.title,
             tag_serial: tag_id.tag_serial,
-            enabled: true,
+            enabled: false,
+            active: active ? (
+              <CheckCircleIcon className="h-6 text-green-500" />
+            ) : (
+              <XCircleIcon className="h-6 text-red-500" />
+            ),
             actions: (
               <div className="flex items-center space-x-3">
                 <Switch
                   checked={enabled}
                   onChange={setEnabled}
+                  onClick={handleDisabled}
+                  data-id={id}
                   className={`${
                     enabled ? 'bg-blue-600' : 'bg-gray-200'
                   } relative inline-flex h-6 w-11 items-center rounded-full`}
@@ -117,7 +191,9 @@ const Index = () => {
                     } inline-block h-4 w-4 transform rounded-full bg-white`}
                   />
                 </Switch>
-                <XIcon className="h-6 text-rose-400" />
+                <button onClick={handleCancel} data-tag={tag_id.id}>
+                  <XIcon className="h-6 text-rose-400" />
+                </button>
               </div>
             ),
           };
@@ -131,8 +207,8 @@ const Index = () => {
     <>
       {modal === 'recharge' ? (
         <RechargueForm
-          open={open}
-          setOpen={setOpen}
+          open={openModal}
+          setOpen={setOpenModal}
           accountNumber={accountNumber}
         />
       ) : null}

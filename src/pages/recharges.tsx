@@ -33,6 +33,9 @@ const Recharges = () => {
   const accountNumber = useSelector(
     (state: any) => state.loginUser?.user_info?.account_number
   );
+  const balance = useSelector(
+    (state: any) => state.loginUser?.account_info?.nominal_balance
+  );
   const { mutate } = useMutation(
     (account: any) => {
       return requester({
@@ -44,7 +47,7 @@ const Recharges = () => {
     {
       onSuccess: (response) => {
         const { data } = response;
-        console.log(data);
+        return data.data;
       },
       onError: (error: AxiosError) => {
         dispatch(open({ text: error.response.statusText, type: 'error' }));
@@ -120,7 +123,7 @@ const Recharges = () => {
                 </div>
                 <div>
                   <h2 className="text-lg text-gray-600">Saldo actual</h2>
-                  <h2 className="text-2xl font-medium">Bs 1500.00</h2>
+                  <h2 className="text-2xl font-medium">Bs {balance}</h2>
                 </div>
               </div>
             </div>
