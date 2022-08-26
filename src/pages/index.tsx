@@ -20,16 +20,15 @@ import { useAppDispatch } from '@store/hooks';
 import { open } from '@store/counter/snackbarReducer';
 import { MinusCircleIcon } from '@heroicons/react/solid';
 
-const { requester } = useAxios();
-const useFetchData = () =>
-  useQuery('vehicles', async () => {
-    const { data } = await requester.get('/registered-vehicle/get/');
-    console.log(data);
-    return data.data;
-  });
-
 const Index = () => {
   useGuard();
+  const { requester } = useAxios();
+  const useFetchData = () =>
+    useQuery('vehicles', async () => {
+      const { data } = await requester.get('/registered-vehicle/get/');
+      console.log(data);
+      return data.data;
+    });
   const dispatch = useAppDispatch();
   const [openModal, setOpenModal] = useState(false);
   const [modal, setModal] = useState('');
