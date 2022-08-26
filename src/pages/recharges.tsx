@@ -36,7 +36,7 @@ const Recharges = () => {
   const balance = useSelector(
     (state: any) => state.loginUser?.account_info?.nominal_balance
   );
-  const { mutate } = useMutation(
+  const { mutate, data: response } = useMutation(
     (account: any) => {
       return requester({
         method: 'POST',
@@ -45,16 +45,11 @@ const Recharges = () => {
       });
     },
     {
-      onSuccess: (response) => {
-        const { data } = response;
-        return data.data;
-      },
       onError: (error: AxiosError) => {
         dispatch(open({ text: error.response.statusText, type: 'error' }));
       },
     }
   );
-
   const headers = [
     {
       id: '1',
@@ -75,22 +70,27 @@ const Recharges = () => {
 
   React.useEffect(() => {
     mutate({ account_number: accountNumber });
-    const table = rows.map(
-      ({ external_reference_id, facial_amount, status }) => {
-        return {
-          external_reference_id,
-          facial_amount,
-          status:
-            status === 'created' ? (
-              <CheckCircleIcon className="h-6 text-green-500" />
-            ) : status === 'cancelled' ? (
-              <XCircleIcon className="h-6 text-red-500" />
-            ) : null,
-        };
-      }
-    );
-    setRows(table);
-  }, []);
+  }, [accountNumber, mutate]);
+
+  React.useEffect(() => {
+    if (response) {
+      const table = response.data.data.map(
+        ({ external_reference_id, facial_amount, status }) => {
+          return {
+            external_reference_id,
+            facial_amount,
+            status:
+              status === 'created' ? (
+                <CheckCircleIcon className="h-6 text-green-500" />
+              ) : status === 'cancelled' ? (
+                <XCircleIcon className="h-6 text-red-500" />
+              ) : null,
+          };
+        }
+      );
+      setRows(table);
+    }
+  }, [response]);
 
   return (
     <>
@@ -101,7 +101,6 @@ const Recharges = () => {
           accountNumber={accountNumber}
         />
       ) : null}
-
       <div className="mt-8 w-full">
         <div className="mb-10 space-y-8">
           <div className="flex justify-between">
