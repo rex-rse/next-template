@@ -1,81 +1,126 @@
-import { ReactElement } from 'react';
-import Button from '@components/Button';
-import LogoDark from '@components/icons/LogoDark';
-import Input from '@components/inputs/Input';
-import FooterLayout from '@layouts/FooterLayout';
-import { useForm } from 'react-hook-form';
 import Link from 'next/link';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import FooterLayout from '@layouts/FooterLayout';
+import InputV2 from '@components/inputs/InputV2';
+import { useRouter } from 'next/router';
+import { useAppDispatch } from '@store/hooks';
+import { useMutation } from 'react-query';
+import { AxiosError } from 'axios';
+import { open } from '@store/counter/snackbarReducer';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useAxios } from 'hooks/useAxios';
 
-const Login = () => {
+interface Inputs {
+  name: string;
+  email: string;
+  password: string;
+}
+const Schema = yup.object().shape({
+  name: yup.string().required('Este campo es requerido'),
+  email: yup
+    .string()
+    .email('Debe ser un correo válido')
+    .required('Este campo es requerido'),
+  password: yup
+    .string()
+    .min(8, 'Mínimo 8 caracteres')
+    .max(12, 'Máximo 12 caracteres')
+    .required('Este campo es requerido'),
+});
+
+const Register = () => {
+  const router = useRouter();
+  const { requester } = useAxios();
+  const dispatch = useAppDispatch();
+  const { mutate } = useMutation(
+    (formData: Inputs) => {
+      return requester({
+        method: 'POST',
+        data: formData,
+        url: '/account-holder/create/',
+      });
+    },
+    {
+      onSuccess: (response) => {
+        const { data } = response;
+        dispatch(open({ text: 'operacion exitosa', type: 'success' }));
+        console.log(data);
+        router.push('/login');
+      },
+      onError: (error: AxiosError) => {
+        console.log(error.response.data);
+        dispatch(open({ text: error.response.statusText, type: 'error' }));
+      },
+    }
+  );
+
   const {
     register,
+    handleSubmit,
     formState: { errors },
-  } = useForm<any>({});
-  return (
-    <>
-      <div className="p-4 md:p-10 w-full flex flex-col items-center justify-center">
-        <div className="w-full max-w-md">
-          <div className="backdrop-blur-sm bg-white/30 shadow overflow-hidden rounded-lg px-6 py-14 md:p-14">
-            <div className="max-w-md md:max-w-xs mx-auto">
-              <div className="w-full">
-                <LogoDark className="w-40 mx-2" />
-              </div>
-              <h1 className="text-3xl  my-4 w-full font-bold ">Bienvenido!</h1>
-              <p className="my-4 font-semibold ">Registrate</p>
-              <div className="my-4">
-                <Input
-                  labelClassName=" font-semibold"
-                  errorMessage={errors.name}
-                  label="Nombre"
-                  name="name"
-                  type="text"
-                  register={register}
-                />
-              </div>
+  } = useForm<Inputs>({
+    resolver: yupResolver(Schema),
+  });
 
-              <div className="my-4">
-                <Input
-                  labelClassName=" font-semibold"
-                  errorMessage={errors.email}
-                  label="Email"
-                  name="email"
-                  type="text"
-                  register={register}
-                />
-              </div>
-              <div className="my-4">
-                <Input
-                  labelClassName=" font-semibold"
-                  errorMessage={errors.password}
-                  label="Contraseña"
-                  name="password"
-                  type="password"
-                  register={register}
-                />
-              </div>
-              <div className="my-4">
-                <Button
-                  loading={false}
-                  text="Ingresar"
-                  type="button"
-                  onClick={() => console.log('hola')}
-                />
-              </div>
-              <Link href="login">
-                <p className="text-center cursor-pointer 	 ">
-                  Ya estas registrado? <span>Ingresa</span>
-                </p>
-              </Link>
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const { email, password, name } = data;
+    mutate({ email, password, name });
+  };
+
+  return (
+    <div className="flex place-content-center bg-gradient-to-l from-emerald-700 to-emerald-100">
+      <FooterLayout>
+        <div className="mx-auto my-auto flex flex-col items-center justify-center rounded-2xl bg-white/75 p-10 shadow-2xl">
+          <h1 className="my-4 w-full text-3xl font-bold text-green-900">
+            Bienvenido al sistema
+          </h1>
+          <form className="mt-12" onSubmit={handleSubmit(onSubmit)}>
+            <div>
+              <InputV2
+                label="Nombre"
+                name="name"
+                type="text"
+                errorMessage={errors.name?.message}
+                register={register}
+              />
             </div>
-          </div>
+            <div className="mt-16">
+              <InputV2
+                label="Correo electrónico"
+                name="email"
+                type="text"
+                errorMessage={errors.email?.message}
+                register={register}
+              />
+            </div>
+            <div className="mt-16">
+              <InputV2
+                label="Contraseña"
+                name="password"
+                type="password"
+                errorMessage={errors.password?.message}
+                register={register}
+              />
+            </div>
+            <input
+              type="submit"
+              value="Ingresar"
+              className="mt-20 block w-full cursor-pointer rounded bg-emerald-600/70 px-4 py-2 text-center font-semibold text-white shadow-md hover:bg-emerald-600/50 focus:outline-none focus:ring focus:ring-emerald-600/50 focus:ring-opacity-80 focus:ring-offset-2"
+            />
+          </form>
+          <Link href="login">
+            <p className="mt-4 cursor-pointer text-center text-sm">
+              Ya tienes una cuenta?{' '}
+              <span className="underline decoration-emerald-600 decoration-2 hover:text-emerald-600">
+                Ingresa
+              </span>
+            </p>
+          </Link>
         </div>
-      </div>
-    </>
+      </FooterLayout>
+    </div>
   );
 };
 
-Login.getLayout = function getLayout(page: ReactElement) {
-  return <FooterLayout>{page}</FooterLayout>;
-};
-
-export default Login;
+export default Register;

@@ -1,8 +1,10 @@
 import LandingLayout from '@layouts/LandingLayout';
+import { useAxios } from 'hooks/useAxios';
 import Image from 'next/image';
 import { ReactElement } from 'react';
 import { useQuery } from 'react-query';
-import { requester } from 'utils/requester';
+
+const { requester } = useAxios();
 
 const useFetchData = () =>
   useQuery('team', async () => {
@@ -20,7 +22,7 @@ const Team = () => {
       ) : (
         <div className="flex flex-wrap">
           {data.results.map((character) => (
-            <div className="w-1/5 flex flex-col" key={character.id}>
+            <div className="flex w-1/5 flex-col" key={character.id}>
               <div className="self-center">
                 <Image
                   src={character.image}

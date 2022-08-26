@@ -4,8 +4,8 @@ import { UseFormRegister } from 'react-hook-form';
 interface TInputProps {
   label: string;
   name: string;
-  errorMessage: string;
-  register: UseFormRegister<any>;
+  errorMessage?: any;
+  register?: UseFormRegister<any>;
   type: HTMLInputTypeAttribute;
   disabled?: boolean;
   labelClassName?: string;
@@ -21,11 +21,11 @@ const Input = ({
   labelClassName,
 }: TInputProps) => {
   return (
-    <div className="flex flex-col my-4">
+    <div className="my-4 flex flex-col">
       <label className={labelClassName}>
         {label}
         {errorMessage ? (
-          <span className="text-red-600 font-bold">({errorMessage})</span>
+          <span className="font-bold text-red-600">({errorMessage})</span>
         ) : null}
       </label>
       <input
@@ -33,7 +33,7 @@ const Input = ({
         className={`input ${
           errorMessage
             ? 'input-error'
-            : 'focus:ring-greenDark focus:border-greenDark'
+            : 'focus:border-greenDark focus:ring-greenDark'
         }`}
         name={name}
         disabled={disabled}

@@ -1,7 +1,5 @@
-import Button from '@components/Button';
 import MainCard from '@components/MainCard';
 import Payments from '@components/Payments';
-import { CheckCircleIcon } from '@heroicons/react/outline';
 import LandingLayout from '@layouts/LandingLayout';
 import React, { ReactElement } from 'react';
 

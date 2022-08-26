@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev -p 4000",
+    "build": "next build && next export",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "eslint ./src --fix"
@@ -9,6 +9,7 @@
   "dependencies": {
     "@headlessui/react": "^1.6.5",
     "@heroicons/react": "^1.0.6",
+    "@hookform/resolvers": "^2.9.6",
     "@reduxjs/toolkit": "^1.8.2",
     "axios": "^0.27.2",
     "next": "^12.2.0",
@@ -18,7 +19,9 @@
     "react-hook-form": "^7.33.1",
     "react-query": "^3.39.1",
     "react-redux": "^8.0.2",
-    "redux": "^4.2.0"
+    "redux": "^4.2.0",
+    "redux-persist": "^6.0.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.0",
@@ -36,7 +39,8 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "postcss": "^8.4.14",
-    "prettier": "^2.6.2",
+    "prettier": "^2.7.1",
+    "prettier-plugin-tailwindcss": "^0.1.12",
     "tailwindcss": "^3.0.24",
     "typescript": "^4.7.2"
   }

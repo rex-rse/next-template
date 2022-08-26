@@ -1,4 +1,6 @@
 // const colors = require('tailwindcss/colors');
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   mode: 'jit',
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
@@ -12,6 +14,9 @@ module.exports = {
       xl: '1280px',
     },
     extend: {
+      fontFamily: {
+        sans: ['Rubik', ...defaultTheme.fontFamily.sans],
+      },
       backgroundImage: {
         'card-background-1': "url('/back1.svg')",
         'card-background-2': "url('/back2.svg')",

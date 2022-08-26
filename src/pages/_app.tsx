@@ -6,11 +6,12 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import Head from 'next/head';
 
 import '@styles/globals.css';
-import { ThemeProvider } from 'next-themes';
-import { store } from '@store/index';
+import { store, persistor } from '@store/index';
 import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';
 import Snackbar from '@components/Snackbar';
+import { PersistGate } from 'redux-persist/integration/react';
+import OutForm from '@components/modalForms/OutForm';
 
 export type NextPageWithLayout = NextPage & {
   // eslint-disable-next-line no-unused-vars
@@ -24,22 +25,26 @@ type AppPropsWithLayout = AppProps & {
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
   const client = new QueryClient();
+
   return (
     <QueryClientProvider client={client}>
       <ReduxProvider store={store}>
-        {/* <ThemeProvider> */}
-        <Head>
-          {/* <link
+        <PersistGate loading={null} persistor={persistor}>
+          {/* <ThemeProvider> */}
+          <Head>
+            {/* <link
             rel="icon"
             type="image/png"
             sizes="32x32"
             href="/favicon/favicon.ico"
           /> */}
-        </Head>
-        {getLayout(<Component {...pageProps} />)}
-        <Snackbar />
-        <ReactQueryDevtools initialIsOpen={false} />
-        {/* </ThemeProvider> */}
+          </Head>
+          {getLayout(<Component {...pageProps} />)}
+          <Snackbar />
+          <OutForm />
+          <ReactQueryDevtools initialIsOpen={false} />
+          {/* </ThemeProvider> */}
+        </PersistGate>
       </ReduxProvider>
     </QueryClientProvider>
   );

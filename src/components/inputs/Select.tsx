@@ -19,19 +19,20 @@ const Select = ({
   initialLabelAndValue,
 }: TSelectProps) => {
   return (
-    <div className="flex flex-col my-4">
-      <label className="font-bold">
+    <div className="my-4 flex flex-col">
+      <label className="absolute left-0 -top-3.5 cursor-text text-sm text-gray-900 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-gray-600">
         {label}{' '}
-        {errorMessage ? (
-          <span className="text-red-600 font-bold">({errorMessage})</span>
-        ) : null}
       </label>
       <select
         {...register(name)}
-        className={`input ${errorMessage ? 'input-error' : ''}`}
+        className={`peer h-10 w-full border-0 border-b-2 border-gray-300 bg-white/0 text-gray-900 placeholder-transparent focus:outline-none focus:ring-0 ${
+          errorMessage
+            ? 'border-rose-500 focus:border-rose-500'
+            : 'focus:border-emerald-600'
+        }`}
       >
         <option value={initialLabelAndValue?.value || ''}>
-          {initialLabelAndValue?.label || 'Seleccione'}
+          {initialLabelAndValue?.label || label}
         </option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>

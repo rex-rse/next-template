@@ -1,78 +1,278 @@
-import { ReactElement, useState } from 'react';
-import ThemeSwitch from '@components/ThemeSwitch';
+import React, { ReactElement, useState, useEffect } from 'react';
+import Link from 'next/link';
 import LandingLayout from '@layouts/LandingLayout';
-// import UserPanel from '@layouts/UserPanelLayout';
+import Table from '@components/Table';
 import {
-  decrement,
-  increment,
-  selectCount,
-} from '@store/counter/counterReducer';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import Input from '@components/inputs/Input';
-import { useForm } from 'react-hook-form';
+  TruckIcon,
+  CashIcon,
+  SupportIcon,
+  ChevronRightIcon,
+  XIcon,
+} from '@heroicons/react/outline';
+import { useSelector } from 'react-redux';
+import { useMutation, useQuery } from 'react-query';
+
+import RechargueForm from '@components/modalForms/RechargueForm';
+import { useGuard } from 'hooks/useGuard';
+import { useAxios } from 'hooks/useAxios';
+import { AxiosError } from 'axios';
+import { useAppDispatch } from '@store/hooks';
 import { open } from '@store/counter/snackbarReducer';
-import Button from '@components/Button';
+import { MinusCircleIcon } from '@heroicons/react/solid';
 
 const Index = () => {
+  useGuard();
+  const { requester } = useAxios();
+  const useFetchData = () =>
+    useQuery('vehicles', async () => {
+      const { data } = await requester.get('/registered-vehicle/get/');
+      console.log(data);
+      return data.data;
+    });
   const dispatch = useAppDispatch();
-  const count = useAppSelector(selectCount);
-  const { register } = useForm<any>({});
-  const [loading, setLoading] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [modal, setModal] = useState('');
+  const [enabled, setEnabled] = useState(true);
+  console.log(enabled);
+  const [rows, setRows] = useState([]);
+  const name = useSelector(
+    (state: any) => state.loginUser?.user_info?.first_name
+  );
+  const lastName = useSelector(
+    (state: any) => state.loginUser?.user_info?.last_name
+  );
+  const vehicle = useSelector(
+    (state: any) => state.loginUser?.user_info?.vehicles
+  );
+  const accountNumber = useSelector(
+    (state: any) => state.loginUser?.user_info?.account_number
+  );
+  const balance = useSelector(
+    (state: any) => state.loginUser?.account_info?.nominal_balance
+  );
+  const { data, isLoading } = useFetchData();
+
+  console.log(data);
+
+  const { mutate } = useMutation(
+    (id: any) => {
+      return requester({
+        method: 'POST',
+        data: id,
+        url: '/registered-vehicle/cancel/',
+      });
+    },
+    {
+      onSuccess: (response) => {
+        const { data } = response;
+        return data.data;
+      },
+      onError: (error: AxiosError) => {
+        dispatch(open({ text: error.response.statusText, type: 'error' }));
+      },
+    }
+  );
+
+  const { mutate: mutate2 } = useMutation(
+    (id: any) => {
+      return requester({
+        method: 'POST',
+        data: id,
+        url: '/registered-vehicle/block/',
+      });
+    },
+    {
+      onSuccess: (response) => {
+        const { data } = response;
+        return data.data;
+      },
+      onError: (error: AxiosError) => {
+        dispatch(open({ text: error.response.statusText, type: 'error' }));
+      },
+    }
+  );
+
+  const handleRecharge = () => {
+    setOpenModal(true);
+    setModal('recharge');
+  };
+
+  const handleCancel = (e) => {
+    const id = e.currentTarget.dataset.tag;
+    mutate({ id: id });
+  };
+
+  const handleDisabled = (e) => {
+    const id = e.currentTarget.dataset.id;
+    mutate2({ id: id });
+  };
+
+  const headers = [
+    {
+      id: '1',
+      key: 'make',
+      header: 'Marca',
+    },
+    {
+      id: '2',
+      key: 'model',
+      header: 'Modelo',
+    },
+    {
+      id: '3',
+      key: 'license_plate',
+      header: 'Placa',
+    },
+    {
+      id: '4',
+      key: 'category_title',
+      header: 'Categoría',
+    },
+    {
+      id: '5',
+      key: 'tag_serial',
+      header: 'Tag asociado',
+    },
+    {
+      id: '6',
+      key: 'active',
+      header: 'Habilitado',
+    },
+    {
+      id: '7',
+      key: 'actions',
+      header: 'Acciones',
+    },
+  ];
+
+  useEffect(() => {
+    if (data) {
+      const rows = data.map(
+        ({ id, make, model, license_plate, category, tag_id, active }) => {
+          return {
+            make,
+            model,
+            license_plate,
+            category_title: category.title,
+            tag_serial: tag_id.tag_serial,
+            enabled: true,
+            active: active ? (
+              <div className="rounded-full bg-green-500 text-center">
+                {' '}
+                Activo{' '}
+              </div>
+            ) : (
+              <div className=" rounded-full bg-red-500 text-center">
+                {' '}
+                Inactivo{' '}
+              </div>
+            ),
+
+            actions: (
+              <div className="flex items-center space-x-3">
+                <button onClick={handleDisabled} data-id={id}>
+                  <MinusCircleIcon
+                    className={`h-6 ${
+                      active ? 'text-green-500' : 'text-red-400'
+                    } `}
+                  />
+                </button>
+                <button onClick={handleCancel} data-tag={tag_id.id}>
+                  <XIcon className="h-6 text-rose-400" />
+                </button>
+              </div>
+            ),
+          };
+        }
+      );
+      setRows(rows);
+    }
+  }, [data]);
+
   return (
-    <div className="w-full h-96 flex flex-col justify-center items-center">
-      <p className="text-5xl font-bold text-black text-center">
-        Next JS, Tailwind CSS and Redux Toolkit Template
-      </p>
-      <div className="my-4">
-        <ThemeSwitch />
-      </div>
-      <div>
-        <p>Redux Counter</p>
-        <div className="flex justify-center text-center">
-          <div className="w-1/3">
+    <>
+      {modal === 'recharge' ? (
+        <RechargueForm
+          open={openModal}
+          setOpen={setOpenModal}
+          accountNumber={accountNumber}
+        />
+      ) : null}
+      <div className="mt-8 w-full">
+        <div className="mb-10 space-y-8">
+          <div className="flex items-center justify-between">
+            <h2 className="text-4xl capitalize tracking-wide text-gray-800">
+              Bienvenido, {name} {''} {lastName}
+            </h2>
             <button
-              className="w-7 h-7 rounded-full bg-black text-white hover:opacity-70 font-bold"
-              onClick={() => dispatch(decrement())}
+              onClick={handleRecharge}
+              className="cursor-pointer rounded-lg bg-emerald-600/70 px-4 py-2 text-center font-medium text-white shadow-md hover:bg-emerald-600/50 focus:outline-none focus:ring focus:ring-emerald-600/50 focus:ring-opacity-80 focus:ring-offset-2"
             >
-              -
+              Recargar
             </button>
           </div>
-          <p className="w-1/3">{count}</p>
-          <div className="w-1/3">
-            <button
-              className="w-7 h-7 rounded-full bg-black text-white hover:opacity-70 font-bold"
-              onClick={() => dispatch(increment())}
-            >
-              +
-            </button>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="h-36 rounded-xl shadow-md">
+              <div className="flex h-4/6 items-center space-x-6 rounded-t-xl bg-white px-6">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/30">
+                  <CashIcon className="h-7 w-7 text-emerald-600" />
+                </div>
+                <div>
+                  <h2 className="text-md text-gray-600">Saldo actual</h2>
+                  <h2 className="text-xl font-medium">Bs {balance}</h2>
+                </div>
+              </div>
+              <Link href="/recharges">
+                <div className="flex h-2/6 items-center rounded-b-xl bg-gray-100 px-6 text-emerald-600 decoration-emerald-600 decoration-2 hover:underline">
+                  <h4 className="text-sm font-normal">Más información</h4>
+                  <ChevronRightIcon className="h-4 w-4" />
+                </div>
+              </Link>
+            </div>
+            <div className="h-36 rounded-xl shadow-md">
+              <div className="flex h-4/6 items-center space-x-6 rounded-t-xl bg-white px-6">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/30">
+                  <TruckIcon className="h-7 w-7 text-amber-600" />
+                </div>
+                <div>
+                  <h2 className="text-md text-gray-600">Vehículos</h2>
+                  <h2 className="text-xl font-medium">{vehicle}</h2>
+                </div>
+              </div>
+              <Link href="/vehicles">
+                <div className="flex h-2/6 items-center rounded-b-xl bg-gray-100 px-6 text-emerald-600 decoration-emerald-600 decoration-2 hover:underline">
+                  <h4 className="text-sm font-normal">Más información</h4>
+                  <ChevronRightIcon className="h-4 w-4" />
+                </div>
+              </Link>
+            </div>
+            <div className="h-36 rounded-xl shadow-md">
+              <div className="flex h-4/6 items-center space-x-6 rounded-t-xl bg-white px-6">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/30">
+                  <SupportIcon className="h-7 w-7 text-indigo-600" />
+                </div>
+                <div>
+                  <h2 className="text-md text-gray-600">Tránsitos</h2>
+                  <h2 className="text-xl font-medium">12750</h2>
+                </div>
+              </div>
+              <Link href="/transit">
+                <div className="flex h-2/6 items-center rounded-b-xl bg-gray-100 px-6 text-emerald-600 decoration-emerald-600 decoration-2 hover:underline">
+                  <h4 className="text-sm font-normal">Más información</h4>
+                  <ChevronRightIcon className="h-4 w-4" />
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
+        <div className="space-y-8">
+          <h2 className="text-2xl tracking-wide text-gray-800">
+            Vehículos Asociados
+          </h2>
+          {isLoading ? null : <Table headers={headers} data={rows} />}
+        </div>
       </div>
-      <div>
-        <Input
-          label="test"
-          name="test"
-          type="text"
-          errorMessage="error"
-          register={register}
-        />
-      </div>
-      <div>
-        <button
-          onClick={() =>
-            dispatch(open({ text: 'testasdasdasdasda', type: 'error' }))
-          }
-        >
-          Open SnackBar
-        </button>
-      </div>
-      <Button
-        loading={loading}
-        text="click me pls!"
-        type="button"
-        onClick={() => setLoading(true)}
-      />
-    </div>
+    </>
   );
 };
 

@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 const Snackbar = () => {
   const dispatch = useAppDispatch();
   const { open, text, type } = useAppSelector(snackbar);
+  console.log(type);
 
   const handleClose = () => {
     dispatch(close());
@@ -20,14 +21,21 @@ const Snackbar = () => {
   }, [open, dispatch]);
 
   return open ? (
-    <div className="bg-green-900 border-green-600 border-4 w-96 h-16 rounded-md flex items-center p-4 absolute right-6 top-6">
+    <div
+      className={`absolute right-6 top-6 flex h-16 w-96 items-center rounded-md p-4 ${
+        type == 'success' ? 'bg-emerald-300' : ''
+      } ${type == 'error' ? 'bg-red-500' : ''}`}
+    >
       <div className="w-1/12">
-        <CheckCircleIcon className="block h-6 w-6" aria-hidden="true" />
+        <CheckCircleIcon
+          className="block h-7 w-7 text-white"
+          aria-hidden="true"
+        />
       </div>
-      <h1 className="w-10/12 mx-2">{text}</h1>
+      <h1 className="mx-2 w-10/12 text-lg text-white">{text}</h1>
       <button className="w-1/12">
         <XIcon
-          className="block h-6 w-6"
+          className="block h-7 w-7 text-white"
           aria-hidden="true"
           onClick={handleClose}
         />
